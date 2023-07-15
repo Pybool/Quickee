@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Escrow</title>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+<link rel="stylesheet" href="style.css">
+<script src="/assets/js/bootstrap.bundle.min.js?version=0.0.3"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link href=" https://cdn.jsdelivr.net/npm/rubik-font@0.0.3/css/rubik.min.css " rel="stylesheet">
+<script type="text/javascript">
+    const stripe   = Stripe('pk_test_51NIUkwJ62yskJ0NJfUjTf1SezTRcNS6MhsFyOyubaiBZI0kMPkkN4XxQMFXFdGrm8PWX78hGEbOMtocFrePPZ8xr00mMgvyWDh');
+    window['stripe'] = stripe
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9322906046628939"
+     crossorigin="anonymous">
+</script>
+
+</head>
+<body class="dark-mode" >
+
+    <app-root></app-root>
+    <!--scripts loaded here from cdn for performance -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
+    <script>
+      (function($) {
+          "use strict";
+
+          $('body').scrollspy({
+              target: '.navbar-fixed-top',
+              offset: 60
+          });
+
+          $('#topNav').affix({
+              offset: {
+                  top: 200
+              }
+          });
+          
+          new WOW().init();
+          
+          $('a.page-scroll').bind('click', function(event) {
+              var $ele = $(this);
+              $('html, body').stop().animate({
+                  scrollTop: ($($ele.attr('href')).offset().top - 60)
+              }, 1450, 'easeInOutExpo');
+              event.preventDefault();
+          });
+          
+          $('.navbar-collapse ul li a').click(function() {
+              /* always close responsive nav after click */
+              $('.navbar-toggle:visible').click();
+          });
+
+          $('#galleryModal').on('show.bs.modal', function (e) {
+            $('#galleryImage').attr("src",$(e.relatedTarget).data("src"));
+          });
+
+      })(jQuery);
+    </script>
+     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-messages.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.js"></script>
+    
+    <script>
+        function ToggleOption(element){
+    if(element.parentElement.parentElement.parentElement.classList.contains("open")){
+        element.parentElement.parentElement.parentElement.classList.remove("open");
+
+    }
+    else{
+        element.parentElement.parentElement.parentElement.classList.add("open");
+    }
+}
+
+function setBackgroundColors(element){
+    let AllOptionContainer = document.getElementsByClassName("OptionContainer");
+    for (let index = 0; index < AllOptionContainer.length; index++) {
+        let OptionContainer = AllOptionContainer[index];
+        var elsParentClasses = [];
+        while (OptionContainer) {
+            if(OptionContainer.classList){
+                for (let index2 = 0; index2 < OptionContainer.classList.length; index2++) {
+                    const className = OptionContainer.classList[index2];
+                    elsParentClasses.unshift(className);
+                }
+                OptionContainer = OptionContainer.parentNode;
+            }
+            else{
+                break;
+            }
+        }
+
+        let r = 0;
+        let g = 21;
+        let b = 40;
+        let factor = elsParentClasses.filter(x => x == "OptionContainer").length;
+        r = r * factor;
+        g = g * factor;
+        b = b * factor;
+        AllOptionContainer[index].style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+    }
+}
+
+setBackgroundColors();
+    </script>
+   
+</body>
+</html>
+

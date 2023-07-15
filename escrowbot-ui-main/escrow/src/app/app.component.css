@@ -1,0 +1,65 @@
+@media screen and (max-width:576px){
+    nav{
+        width:100%!important;
+    }
+
+    div.bg-image{
+        background: url("/assets/images/ws1.webp") center/cover!important;
+    }
+
+    nav .container li{
+        background: #212529!important;
+    }
+    
+}
+
+.main-nav{
+    background: #18212d !important;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+}
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 230px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    top: 30px;
+}
+.dropdown:hover .dropdown-menu,
+    .dropdown-menu:hover {
+        display: block;
+    }
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+#accordion-item-nav {
+    position: relative;
+    z-index: 9999;
+}
+
+nav{
+    z-index: 4000!important;
+}
+
+nav .container li a{
+    background-color: transparent!important;
+}
+
+.nav-accordion{
+    background: #212529!important;
+    padding: 20px;
+}
+
+
+.flex-col{
+    display: flex;
+    flex-direction: column;
+    gap:7px;
+}

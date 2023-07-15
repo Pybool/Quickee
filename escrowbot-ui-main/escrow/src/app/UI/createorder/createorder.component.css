@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700');
+
+body{
+  background: url('http://all4desktop.com/data_images/original/4236532-background-images.jpg');
+  font-family: 'Roboto Condensed', sans-serif;
+  color: #262626;
+  margin: 5% 0;
+}
+.container{
+  /* width: 60%; */
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 600px)
+{
+  .container{
+    max-width: 1140px;
+  }
+}
+.d-flex{
+  display: flex;
+  flex-direction: row;
+  background: #f6f6f6;
+  border-radius: 0 0 5px 5px;
+  padding: 25px;
+}
+form{
+  width:60%;
+}
+.Yorder{
+  flex: 2;
+}
+.title{
+/* background-color: rgb(63, 81, 181); */
+  border-radius:5px 5px 0 0 ;
+  padding: 0px;
+  color: #f6f6f6;
+}
+h2{
+  margin: 0;
+  padding-left: 15px; 
+}
+.required{
+  color: red;
+}
+label{
+  color:white;
+}
+label, table{
+  display: block;
+  margin: 15px;
+}
+label>span{
+  float: left;
+  width: 25%;
+  margin-top: 12px;
+  padding-right: 10px;font: size 16px;;
+  font-weight: bold;
+}
+input[type="text"], input[type="tel"], input[type="email"],input[type="number"], select
+{
+  width: 50%;
+  height: 30px;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  border: 1px solid #dadada;
+  color: white
+}
+
+.input-error{
+  color:red;
+
+}
+
+span
+
+.accdetails{
+    width: 14vw!important;
+}
+select{
+  width: 72%;
+  height: 45px;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+}
+.Yorder{
+  margin-top: 0px;
+  height: 655px;
+  padding: 20px;
+  border: 1px solid #dadada;
+}
+table{
+  margin: 0;
+  padding: 0;
+}
+th{
+  border-bottom: 1px solid #dadada;
+  padding: 10px 0;
+}
+tr>td:nth-child(1){
+  text-align: left;
+  color: white;
+}
+tr>td:nth-child(2){
+  text-align: right;
+  color: #52ad9c;
+}
+td{
+  border-bottom: 1px solid #dadada;
+  padding: 25px 25px 25px 0;
+  color:white!important;
+}
+
+p{
+  display: block;
+  color: #888;
+  margin: 0;
+  padding-left: 25px;
+}
+.Yorder>div{
+  padding: 15px 0; 
+}
+
+.transparent{
+    background-color: transparent;
+    border: none !important;
+    outline: 0 !important;
+    width: 80% !important;
+    color:white!important;
+}
+
+button{
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 30px;
+  background: #52ad9c;
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+}
+button:hover{
+  cursor: pointer;
+  background: #428a7d;
+}
+
+
+
+@media screen and (max-width:576px){
+  #payment-row-container{
+      display: flex;
+      flex-direction: column!important;
+      gap: 10px;
+      margin-top: 10px;
+  }
+
+  .form-file-label{
+    font-size: 10px;
+  }
+  
+  form{
+    width:100%;
+  }
+
+  nav{
+    width:100%!important;
+  } 
+
+  #home-search{
+    font-size: 13px;
+    width: 80%!important;
+    height: 20px;
+}
+
+section{
+    padding-top: 60px;
+    /* width:fit-content; */
+}
+
+section .container h1 {
+    font-size: 1.6rem;
+}
+
+section .container p {
+    font-size: 0.6rem;
+}
+
+.container{
+    --bs-gutter-x: 0.5rem;
+}
+
+h3.subtext{
+    font-size: 0.9rem!important;
+}
+
+div.Yorder{
+  width:100%;
+  margin-top:15px;
+  border-radius: 10px;
+}
+
+div.file{
+  margin-bottom: 10px;
+  
+}
+
+label span{
+  width: 100%;
+}
+
+ 
+}

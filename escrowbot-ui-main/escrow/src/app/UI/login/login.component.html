@@ -1,0 +1,41 @@
+
+
+
+  <div style="padding-top: 100px;" class="container">
+    <div class="interior">
+    </div>
+    </div>
+  <div id="open-modal" class="modal-window">
+    <div class="title wmodal glass-initial">
+      <a href="#" title="Close" class="modal-close">Close</a>
+      <h1>Login!</h1>
+      <br>
+      <form action="/charge" method="post" id="payment-form">
+        <div class="form-row ">
+            <div id="login-form" #cardInfo>
+                <form (ngSubmit)="login()" #loginForm="ngForm">
+                    <div>
+                      <label for="email">Email:</label>
+                      <input  class="form-control" type="email" id="email" name="email" [(ngModel)]="credentials.email" required>
+                    </div>
+                    <div>
+                      <label for="password">Password:</label>
+                      <input  class="form-control" type="password" id="password" name="password" [(ngModel)]="credentials.password" required>
+                    </div>
+                  </form>
+            </div>
+            <!-- Used to display form errors -->
+            <div id="card-errors" role="alert"></div>
+        </div>
+        <div style="max-height:50px!important;" class="flex-row-40">
+          <button style="max-height:50px!important;" (click)="login()" class="btn btn-outline-secondary" type="submit" [disabled]="loginForm.invalid">Login</button>
+          
+        </div>
+        <br>
+        &nbsp;&nbsp;<span>Don't have an account yet? <a href="/register">Register</a></span>
+    </form>
+    <app-spinner *ngIf="showSpinner"></app-spinner>
+    </div>
+  </div>
+
+  <a style="display:block;" id="payment-modal" class="btn" href="#open-modal">👋 Basic CSS-Only Modal</a>

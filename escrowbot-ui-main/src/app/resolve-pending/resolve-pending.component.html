@@ -1,0 +1,181 @@
+	<!-- START PRELOADER -->
+	<!-- <div id="page-preloader">
+		<div class="theme-loader">Bitfonix</div>
+	</div> -->
+	<!-- END PRELOADER --> 
+	
+	<!-- START HEADER SECTION -->
+    
+	<header class="main-header header-1">
+		<!-- START TOP AREA -->
+		<!-- <div class="top-area">
+			<div class="auto-container">
+				<div class="row">
+					<div class="col-lg-8 col-md-12 col-sm-12 col-12">
+						<div class="info-menu">
+							<ul>
+								<li><a href="#"><i class="icofont icofont-time"></i> Opening Hours - Mon to Sat: 9AM to 5PM</a></li>
+							</ul>
+						</div>
+					</div>
+				
+				</div>
+			</div>
+		</div> -->
+		<!-- END TOP AREA -->
+
+		<!-- START LOGO AREA -->
+		<div>
+			
+			<div class="auto-container">
+				<div class="row">
+					<div class=" col-sm-6 ">
+						<!-- <div class="logo">
+							<a href="index-2.html">
+							   <img class="img-fluid" src="assets/img/logo.png" alt="">
+							</a>
+						</div> -->
+					</div>
+					<!-- end col -->
+					<!-- <div class="col-lg-7 col-md-12 col-sm-12 col-12">
+						<div class="header-info-box">
+                            <div class="header-info-icon">
+								<i class="fa fa-envelope-open"></i>
+							</div>
+							<p>Email Us</p>
+                            <h6>info@yoursite.com</h6>
+                        </div>
+						<div class="header-info-box">
+                            <div class="header-info-icon">
+								<i class="icofont icofont-phone"></i>
+							</div>
+							<p>Call Us</p>
+                            <h6>123-456-0975</h6>
+                        </div>
+						<div class="header-info-box">
+                            <a href="#" class="quote-btn">Get Started <i class="icofont icofont-caret-right"></i></a>
+                        </div>
+					</div> -->
+					<!-- end col -->
+				</div>
+			</div>
+		</div>
+		<!-- END LOGO AREA -->
+
+
+		<!-- END NAVIGATION AREA -->	
+	</header>
+	<!-- END HEADER SECTION -->
+<div class="body">
+	<!-- START SLIDER SECTION -->
+	<section style="font-size: 20px;background-image: url(login.jpg)" class="slider-section">
+		<div data-background="assets/img/bg/slide1.jpg" class="home-slides owl-carousel owl-theme ">
+			<div class="home-single-slide" data-background="assets/img/bg/slide1.jpg">
+				<div class="home-slide-overlay"></div>
+				<div class="home-single-slide-inner">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-12 ">
+                                <div align = "center">
+                                    <br>
+									<br>
+								   <h1  style="text-align: center; font-size: 35px; color:whitesmoke;" >Resolve pending order ({{Metadata.order_id}})</h1>
+
+                                </div>
+                                
+								<div  style="text-align: center;" class = "round_div" >
+                                    <br>
+									<h1>Order Reference</h1>
+									<p style="font-size: 30px; color:white;" class="text-capitalize">{{Metadata.order_id}}</p>
+                                    <hr style=" background-color:grey;">
+                                    <h1>Date/Time</h1>
+									<p style="font-size: 30px; color:white;" class="text-capitalize">{{Metadata.date_time | uppercase}}</p>
+                                    <hr style=" background-color:grey;">
+                                    
+                                    <h1>Provider ({{Metadata.provider_type}})</h1>
+									<p style="font-size: 30px; color:white;" class="text-capitalize">{{Metadata.network}}</p>
+									<p *ngIf="Metadata.provider_type=='Disco'" style="font-size: 30px; color:white;" class="text-capitalize">{{Metadata.disco.split(",")[0]}}</p>
+                                    <hr style=" background-color:grey;">
+
+									<ng-container *ngIf="Metadata.service=='cable';" >
+										<h1>Bouquet name</h1>
+										<p style="font-size: 30px; color:white;" class="text-capitalize">{{Metadata.cable_plan}}</p>
+										<hr style=" background-color:grey;">
+									</ng-container>
+
+									<!-- <ng-container *ngIf="Metadata.service=='electricity';" >
+										<h1>Meter type</h1>
+										<p style="font-size: 30px; color:white;" class="text-capitalize">{{Metadata.cable_plan}}</p>
+										<hr style=" background-color:grey;">
+									</ng-container> -->
+                                
+                                    <!-- <h1>Commodity </h1><app-genericoin style="font-size:40px;" align="center" id="mole" [coinname]=metadata.cryptoname  [style.color]="'white'"  ></app-genericoin> -->
+                                    <h1>Recipient ({{Metadata.recipient_type}})</h1>
+									<p style="font-size: 30px; color:white;" class="text-capitalize">{{Metadata.recipient}}</p>
+									<hr style=" background-color:grey;">
+
+									<h1>Amount</h1>
+									
+									<p *ngIf="Metadata.service=='data';" style="font-size: 30px; color:white;" class="text-capitalize">NGN {{Metadata.amount}}  Bundle: {{(Metadata.plan)}}</p>
+									<p *ngIf="Metadata.service!='data'" style="font-size: 30px; color:white;" class="text-capitalize">NGN {{Metadata.amount}}</p>
+                                    <hr style=" background-color:grey;">
+
+									
+
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-sm-12 ">
+
+                                                <button style="width: 150px;" [style.color]="'white'" (click) = "resolvePendingOrder([Metadata.order_id, Metadata.service, Metadata.mode, Metadata.api_provider])" [value]="[Metadata.order_id, Metadata.service, Metadata.mode, Metadata.api_provider]"  class="btn btn-primary ">Resolve</button>&nbsp;&nbsp;
+                                                <button style="width: 150px;" [style.color]="'white'"  [value]="[Metadata.order_id, Metadata.service]"  class="btn btn-success "> Complaint </button>&nbsp;&nbsp;
+                                                <div class = " mx-left">
+													<label style="text-align: left; padding-right:1000px ; " align="left" >Complaints</label>
+													<textarea class = "form-control" rows = "3" placeholder = "Type in your complaints..."></textarea>
+													<p style="text-align: left;">Note: You cannot resolve orders for transactions with wrong details, if service was provided to the recipient</p>
+												</div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+									 
+								</div>
+								<br>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<app-alert></app-alert>
+			<!-- end single slider -->
+		
+		
+			<!-- end single slider -->
+		</div>
+	</section>
+	<!-- END SLIDER SECTION  -->
+	
+	<!-- START ABOUT SECTION -->
+	<br>
+    <div  id="about" class="section-padding">
+        <div class=" bin_cont">
+			<div class="row">
+				<div class="col-12 text-left">
+					<div class="section-title">
+						<br>
+						<!-- <h3>Bitfonix Escrow <span>Features</span></h3> -->
+						
+					</div>
+				</div>
+			</div>
+			<!-- end section title -->
+		</div>
+    </div>
+    <!-- END ABOUT SECTION -->
+	
+	<!-- START PROMO SECTION -->
+  
+    <!-- END PROMO SECTION -->
+</div>
+	
+    <!-- END FOOTER -->
+	

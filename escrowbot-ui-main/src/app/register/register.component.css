@@ -1,0 +1,113 @@
+* {
+    font-family: "Times New Roman", Times, serif;
+    
+}
+
+.error{
+
+    border: 0.1px rgb(184, 123, 123);
+    border-radius: 5px;
+    text-align:center!important;
+}
+
+#parent_div {
+    background-image: url('login.jpg');
+    padding-top: 20px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 750px;
+   }
+
+b {
+    text-align: left!important;
+}
+
+.labels{
+
+    text-align:left!important;
+    color:white;
+}
+
+.email {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+.email input {
+    outline: none;
+    border: 0.5px solid lightgray;
+    border-radius: 5px;
+    height: 40px;
+    padding: 10px 10px;
+}
+.email input:focus {
+    border: 2px solid lightskyblue;
+}
+
+.email input:hover {
+    border: 2px solid rgb(250, 135, 173);
+}
+
+.phone {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+.phone input {
+    outline: none;
+    border: 0.5px solid lightgray;
+    border-radius: 5px;
+    height: 40px;
+    padding: 10px 10px;
+}
+.phone input:focus {
+    border: 2px solid lightskyblue;
+}
+
+.phone input:hover {
+    border: 2px solid rgb(250, 135, 173);
+}
+
+
+
+
+.pass {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+.pass input {
+    outline: none;
+    border: 0.5px solid lightgray;
+    border-radius: 5px;
+    height: 40px;
+    padding: 10px 10px;
+}
+.pass input:focus {
+    border: 2px solid lightskyblue;
+}
+
+.pass input:hover {
+    border: 2px solid rgb(250, 135, 173);
+}
+
+
+.pass_again {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+.pass_again input {
+    outline: none;
+    border: 0.5px solid lightgray;
+    border-radius: 5px;
+    height: 40px;
+    padding: 10px 10px;
+}
+.pass_again input:focus {
+    border: 2px solid lightskyblue;
+}
+
+.pass_again input:hover {
+    border: 2px solid rgb(250, 135, 173);
+}

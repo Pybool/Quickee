@@ -1,0 +1,176 @@
+<div style="padding-top: 60px;" class="nk-content ">
+    <div style=" min-height: 600px;" id='parent_div' class="container-fluid">
+        <div>
+            <!-- <alert></alert> Use event emitter to silence this alert ngif modal is open -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div align="left" class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-12 ">
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-sm-10 ">
+                                                <h1 style="font-size:2vw;" style=" color: white !important;" class="text-left">Dashboard</h1>
+                                            </div>
+                                            <!-- <div class="col-sm-2 ">
+                                                <button align="right" (click)="openModal()" type="button" style="width:250px;" class="btn btn-primary">Personalize your subscriptions</button>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>     
+                            
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="cards zoom">
+                                        <p style="font-size:1vw;" class="cover">&nbsp;<b>Airtime subscriptions</b></p>
+                                        <h2 style="font-size:1vw;">Airtime Volume:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <b>NGN {{AirtimeMetrics.toLocaleString('en-US')}}</b></h2>
+                                        <hr>
+                                        <h2 style="font-size:1vw;">Airtime Total Cost:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <b>NGN {{AirtimeMetrics.toLocaleString('en-US')}}</b></h2>
+                                        <hr>
+                                    </div>&nbsp;&nbsp;
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="cards zoom">
+                                        <p style="font-size:1vw;" class="cover">&nbsp;<b>Data subscriptions</b></p>
+                                        <h2 style="font-size:1vw;">Data Volume:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <b>{{DataMetrics.volume.toLocaleString('en-US')}} GB</b></h2>
+                                        <hr>
+                                        <h2 style="font-size:1vw;">Data Total Cost:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <b>NGN {{DataMetrics.totalamount.toLocaleString('en-US')}}</b></h2>
+                                        <hr>
+                                    </div>&nbsp;&nbsp;
+                                </div>
+                                <div class="col-sm-3">
+                                    <div  class="cards zoom">
+                                        
+                                        <p style="font-size:1vw;" class="cover">&nbsp;<b>Electricity bill subscriptions</b></p>
+                                        <h2 style="font-size:1vw;">Units Volume:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <b>{{ElectricityMetrics.units.toLocaleString('en-US')}} KW/H</b></h2>
+                                        <hr>
+                                        <h2 style="font-size:1vw;">Units total Cost:&nbsp;&nbsp;&nbsp;  <b>NGN {{ElectricityMetrics.totalamount.toLocaleString('en-US')}}</b></h2>
+                                        <hr>
+                                    </div>&nbsp;&nbsp;
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="cards zoom">
+                                        <p style="font-size:1vw;" class="cover">&nbsp;<b>Cable subscriptions</b></p>
+                                        <h2 style="font-size:1vw;">Cable Volume:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <b>NGN {{CableMetrics.toLocaleString('en-US')}}</b></h2>
+                                        <hr>
+                                        <h2 style="font-size:1vw;">Cable Total Cost:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <b>NGN {{CableMetrics.toLocaleString('en-US')}}</b></h2>
+                                        <hr>
+                                    </div>&nbsp;&nbsp;
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="cards">
+                                        <p style="font-size:1vw;" class="cover">&nbsp;<b>Active Auto-Subscriptions</b></p>
+                                        <div class="">
+                                            <ul class="tagList">
+                                                <!-- <li style="font-size:1vw;" class="subscriptionstatus subscriptionactive" type="text" id="dataactive" name="dataactive">Data subscription</li>
+                                                <li style="font-size:1vw;" class="subscriptionstatus subscriptionactive" type="text" id="dataactive" name="dataactive">Airtime subscription</li> -->
+                                                
+                                                <li style="font-size:1vw;" class="option-item cust_approval_users" value="BHA">
+                                                    <span>Airtime subscription</span>
+                                                    <span onclick="this.parentNode.remove()" class="rmTag" data-oe-model="ir.ui.view" data-oe-id="935" data-oe-field="arch" data-oe-xpath="/t[1]/t[1]/t[1]/body[1]/div[2]/div[1]/div[2]/template[2]/div[2]/div[1]/div[3]/ul[1]/t[1]/li[1]/span[2]" value="BHA">×</span>
+                                                </li>
+                                             
+                                                <li style="font-size:1vw;" class="option-item cust_approval_users" value="BHM">
+                                                    <span>Data subscription</span>
+                                                    <span onclick="this.parentNode.remove()" class="rmTag" data-oe-model="ir.ui.view" data-oe-id="935" data-oe-field="arch" data-oe-xpath="/t[1]/t[1]/t[1]/body[1]/div[2]/div[1]/div[2]/template[2]/div[2]/div[1]/div[3]/ul[1]/t[1]/li[1]/span[2]" value="BHM">×</span>
+                                                </li>
+                                             
+                                                <li style="font-size:1vw;" class="option-item cust_approval_users" value="CCU">
+                                                    <span>Cable subscription</span>
+                                                    <span onclick="this.parentNode.remove()" class="rmTag" data-oe-model="ir.ui.view" data-oe-id="935" data-oe-field="arch" data-oe-xpath="/t[1]/t[1]/t[1]/body[1]/div[2]/div[1]/div[2]/template[2]/div[2]/div[1]/div[3]/ul[1]/t[1]/li[1]/span[2]" value="CCU">×</span>
+                                                </li>
+    
+                                                <li style="font-size:1vw;" class="option-item cust_approval_users" value="CCU">
+                                                    <span>Electricity subscription</span>
+                                                    <span onclick="this.parentNode.remove()" class="rmTag" data-oe-model="ir.ui.view" data-oe-id="935" data-oe-field="arch" data-oe-xpath="/t[1]/t[1]/t[1]/body[1]/div[2]/div[1]/div[2]/template[2]/div[2]/div[1]/div[3]/ul[1]/t[1]/li[1]/span[2]" value="CCU">×</span>
+                                                </li>
+                                            
+                                        
+                                            </ul>
+                                        </div>
+                                        
+                                    </div>&nbsp;&nbsp;
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="cards zoom">
+                                        <p style="font-size:1vw;" class="cover">&nbsp;<b>Total Services Cost</b></p>
+                                        <div>
+                                            <p  style="padding-top:30px;font-size:2vw;" align="center"><b>NGN {{totalpurchaseamount.toLocaleString('en-US')}}</b></p> 
+                                        </div>
+                                        
+                                    </div>&nbsp;&nbsp;
+                                </div>
+                                
+    
+                            </div>
+                            
+                            <br>
+                            <div style="height: fit-content;" class="faceboard ">
+                                <!-- <app-datetime></app-datetime>
+                                 -->
+                                 <div class="row g-gs">
+                                    <div class="col-sm-6">
+                                        <div style="padding-left:20px;"><b>Airtime Metrics</b></div>
+                                        <div id="chartdiv" style="width: 100%; height: 400px;"></div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div style="padding-left:20px;"><b>Data Metrics</b></div>
+                                        <div id="chartdiv1" style="width: 100%; height: 400px;"></div>
+                                    </div>
+                                    <br>
+                                    <div class="col-sm-6">
+                                        <div style="padding-left:20px;"><b>Cable Metrics</b></div>
+                                        <div id="chartdiv2" style="width: 100%; height: 400px;"></div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div style="padding-left:20px;"><b>Electricity Metrics</b></div>
+                                        <div id="chartdiv3" style="width: 100%; height: 400px;"></div>
+                                    </div>
+                                 </div>
+                                                                                        
+                            </div>
+                            <div>
+                                <!-- <div style="padding-top: 10px; color:#0A1021 !important;" class=" col-12 "> -->
+                                    <br>
+                                    <h2 style="font-size:2vh;color:white;">Recent Transactions</h2>
+                                    <div style="background:white!important;border-radius:5px;" class="card-inner p-0">
+                                        <div class="nk-tb-list nk-tb-ulist is-compact">
+                                            <div class="nk-tb-item nk-tb-head">
+                                               
+                                                <div class="nk-tb-col"><b><span class="sub-text">Service Provider</span></b></div>
+                                                <div class="nk-tb-col tb-col-sm"><b><span class="sub-text">Service Type</span></b></div>
+                                                <div class="nk-tb-col tb-col-sm"><b><span class="sub-text">Recipient</span></b></div>
+                                                <div class="nk-tb-col tb-col-xxl"><b><span class="sub-text">Value Delivered</span></b></div>
+                                                <div class="nk-tb-col tb-col-xxl"><b><span class="sub-text">Cost</span></b></div>
+                                                <div class="nk-tb-col"><span class="sub-text"><b>Time Reference</b></span></div>
+                                                <div class="nk-tb-col"><span class="sub-text"><b>Status</b></span></div>
+                                                
+                                            </div>
+                                            
+                                            <ng-container *ngFor="let trx of RecentTransactions;">
+                                                <div style="cursor:pointer;" class="nk-tb-item">
+                                                   
+                                                    <div class="nk-tb-col tb-col-md"><span><b>{{trx.cable_network || trx.network || trx.disco | uppercase}}</b></span></div>
+                                                    <div class="nk-tb-col tb-col-md"><span>{{trx.service ||"Airtime" | titlecase }} subscription</span></div>
+                                                    <div class="nk-tb-col tb-col-md"><span>{{trx.recipient }}</span></div>
+                                                    <div class="nk-tb-col tb-col-md"><span>{{trx.cable_plan || trx.plan || trx.units || 'Airtime'}}</span></div>
+                                                    <div class="nk-tb-col tb-col-md"><span>NGN {{trx.amount_charged || trx.amount}}</span></div>
+                                                    <div class="nk-tb-col tb-col-md"><span>{{trx.date_time.split("--")[1]}}</span></div>
+                                                    <ng-container *ngIf="trx.vend_status== false">
+                                                        <div class="nk-tb-col tb-col-md"><span>Pending</span></div>
+                                                    </ng-container>
+                                                    <ng-container *ngIf="trx.vend_status== true">
+                                                        <div style="font-size:1vh; color:rgb(50, 199, 50);" class="nk-tb-col tb-col-md"><span>Completed</span></div>
+                                                    </ng-container>
+                                              
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+    
+                            </div>
+</div>
+

@@ -1,0 +1,25 @@
+# Angular-specific ignores
+/node_modules
+/dist
+/dist-out
+/.angular
+/.ng_build
+/.ng_deps
+/.ng-packagr
+/coverage
+
+# Django-specific ignores
+/__pycache__/
+/migrations/
+/static/
+/media/
+/.env
+/db.sqlite3
+
+# Virtual environment ignores
+/venv
+/env
+/.venv
+/.env
+/pyvenv.cfg
+*.pyc

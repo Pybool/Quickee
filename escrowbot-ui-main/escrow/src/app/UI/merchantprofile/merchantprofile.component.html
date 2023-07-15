@@ -1,0 +1,104 @@
+
+
+
+<div style="padding-top: 100px;" class="container">
+  
+    </div>
+  <div id="open-modal" class="modal-window">
+    <div class="title">
+      <a href="#" title="Close" class="modal-close">Close</a>
+      <br>
+      <form action="/charge" method="post" id="payment-form">
+        <div class="form-row">
+            <div id="login-form" #cardInfo>
+                
+
+<div class="mat-card glass-initial">
+    <mat-card>
+        <mat-toolbar>
+          <div class="md-toolbar-tools">
+            <h2>
+              <span style="color:white;text-transform: uppercase;">{{merchant_profile?.username}}</span>
+            </h2>
+            <span fxFlex></span>
+            
+          </div>
+        </mat-toolbar>
+        <mat-card-content fxLayout.sm="column" fxLayout.gt-sm="row">
+          <div style="width:100%" class="user flex-row-40 col-12" fxLayout.sm fxLayout.gt-sm="column">
+            
+            <div class="flex-col col-3">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80" alt="user avatar" class="user-avatar" />
+                <button mat-icon-button class="user-avatar-edit" (click)="browserAvatar()">
+                    <mat-icon>photo_camera</mat-icon>
+                  </button>
+                <form class="flex-col" fxLayout="column" fxLayoutAlign="start" fxLayoutAlign.sm="center start" fxFlex>
+                    <mat-form-field class="user-input-container">
+                      <label for="firstname">Firstname:&nbsp;&nbsp;</label>
+                      <input id="firstname" matInput value="{{merchant_profile?.firstname}}" readonly="{{isReadOnly}}" required fxFlex/>
+                    </mat-form-field>
+                    <mat-form-field class="user-input-container">
+                      <label for="surname">Surname:&nbsp;&nbsp;</label>
+                      <input id="surname" matInput value="{{merchant_profile?.surname}}" readonly="{{isReadOnly}}" required />
+                    </mat-form-field>
+                    <mat-form-field class="user-input-container">
+                        <label for="othername">Othername:&nbsp;&nbsp;</label>
+                        <input id="othername" matInput value="{{merchant_profile?.othername}}" readonly="{{isReadOnly}}" required />
+                      </mat-form-field>
+                  </form>
+            </div>
+            
+            
+            <form style="width:100%" class="flex-row col-9" >
+                <div class="flex-cols " >
+                  <mat-form-field >
+                    <label for="email">E-mail:&nbsp;&nbsp;</label>
+                    <input id="email" type="email" class="data-field" matInput value="{{merchant_profile?.email}}" readonly="{{isReadOnly}}"required />
+                  </mat-form-field>
+                  <mat-form-field >
+                    <label for="mobile">Mobile:&nbsp;&nbsp;</label>
+                    <input id="mobile" class="data-field" matInput value="{{merchant_profile?.phone}}" readonly="{{isReadOnly}}" required/>
+                  </mat-form-field>
+                  <mat-form-field >
+                    <label for="accountno">Bank acc no:&nbsp;&nbsp;</label>
+                    <input id="accountno"  class="data-field" matInput value="{{merchant_profile?.accountno}}" readonly="{{isReadOnly}}" required />
+                  </mat-form-field>
+                  <mat-form-field >
+                    <label for="bnk">Bankname:&nbsp;&nbsp;</label>
+                    <input id="bnk" class="data-field" matInput value="{{merchant_profile?.bankname}}" readonly="{{isReadOnly}}" required />
+                  </mat-form-field>
+                  <mat-form-field >
+                    <label for="nationality">Nationality:&nbsp;&nbsp;</label>
+                    <input id="nationality" class="data-field" matInput type="tel" value="{{merchant_profile?.country}}" readonly="{{isReadOnly}}" required />
+                  </mat-form-field>
+                  <mat-form-field >
+                    <label for="regdate">Date Registered:&nbsp;&nbsp;</label>
+                    <input id="regdate" class="data-field" matInput type="tel" readonly value="{{merchant_profile?.regdate}}" [disabled]="true" />
+                  </mat-form-field>
+                  <mat-form-field class="row-margin-40">
+                    <label for="username">Username:&nbsp;&nbsp;</label>
+                    <input id="username" class="data-field" matInput type="email" value="{{merchant_profile?.username}}" readonly="{{isReadOnly}}" />
+                    
+                  </mat-form-field>
+                  
+                </div>
+                <div >
+                  <!-- <label for="report-seller">Report:&nbsp;&nbsp;</label> -->
+                  <textarea class="form-control" style="width:100%" rows="8" id="report-seller"  matInput type="text" placeholder=" Report Seller on this order" readonly="false"></textarea>
+                  <button style="width:200px" (click)="reportSeller()" class="btn btn-outline-danger">Submit</button>
+                </div>
+              </form>
+          </div>          
+        </mat-card-content>
+    </mat-card>
+</div>
+            </div>
+            <!-- Used to display form errors -->
+            <div id="card-errors" role="alert"></div>
+        </div>
+        
+    </form>
+    </div>
+  </div>
+
+  <a style="display:block;" id="payment-modal" class="btn" href="#open-modal">👋 Basic CSS-Only Modal</a>

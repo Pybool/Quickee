@@ -1,0 +1,206 @@
+<div class="">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  
+    <!-- Header -->
+    <a name="about"></a>
+    <div class="intro-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 ">
+                    <div class="intro-message">
+                        <h1>IBEDC CMS ADMIN GUIDE</h1>
+                        <hr class="intro-divider">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <br>
+     <h2 style="padding-left:20px;">Admin Guide</h2>
+     <li style="padding-left:20px;" class="bold"><a href="http://192.168.15.160:8069/cms/web/login">Click here to navigate to the login page </a> or paste (http://192.168.15.160:8069/cms/web/login) in browser address bar</li>
+     <br>
+     <div id="accordion-admin" class="accordion">
+      <div class="accordion-item">
+         <a href="#" class="accordion-head" data-bs-toggle="collapse" data-bs-target="#accordion-admin-item-1">
+            <h6 style="padding-left:20px;" class="title">Admin Settings</h6>
+            <span class="accordion-icon"></span>      
+         </a>
+         <div class="accordion-body " id="accordion-admin-item-1" data-bs-parent="#accordion-admin">
+            <div class="accordion-inner">
+              <p class="bolder">Follow the steps below to add configurations the admin settings</p>
+               <p class="bold">Expand the admin section on the navigation bar and click on Admin settings link, the page below will be displayed.<br>The Customer Settings Tab is presented by default</p>
+               <br>
+               <p class="bolder"><b>Customer Bounded Fields</b></p>
+               <br>
+               <p class="bold">The Account Type through CAAD VAT options are configured in this page. The Account Type up until Service Band are used for creating new and editing existing options for some of the the customer fields. <br> This section will demonstrate creating and editing new Account Type options for the Account Type section, The same step will also apply to all other sections on this page.</p>
+               <img style="padding-left:7%" class="img-responsive zoom img-radii" src="/assets/docimages/admin-landing.PNG" alt="">   
+               <br>
+               <p class="bolder"><b>Create & Update Account Types</b></p>
+               <br>
+               <p class="bold">To create a new Account Type option (Prepaid & Postpaid), click the Add button for the Account Type section and a modal shown below pops up</p>
+               <img style="padding-left:7%" class="img-responsive zoom img-radii" src="/assets/docimages/admin-account-type-create.PNG" alt="">   
+               <br>
+               <p class="bold">Type in the new Account Type you desire to add in the input box and <strong>Press Enter on the keyboard to Enlist it , you can add multiple at one go pressing enter for each to enlist. After enlisting all click the save Button .In the Image below we type in <i>Testprepaid</i> in the Input Box and press enter to enlist it. When enlisted it appears as a lime green pill on the modal, repeat for each account type to add several and click save button. You can delist by clicking the X button on the pill component</strong>.<br>Upon successful creation of the Account types you receive a notification  </p>
+               <img style="padding-left:7%" class="img-responsive zoom img-radii" src="/assets/docimages/admin-account-type-create-entered.PNG" alt="">               
+              </div>
+              <br>
+               <p class="bold">To Update an existing Account Type, click the Edit button for the Account Type section and a modal shown below pops up</p>
+               <img style="padding-left:7%" class="img-responsive zoom img-radii" src="/assets/docimages/admin-account-type-edit.PNG" alt="">   
+               <br>
+               <br>
+               <p class="bold">Double click on the pill you wish to edit and type in the text that appears in the text input that appears, <strong>Press the enter button</strong>, the Input box will revert to a Pill updated with new name for the Account Type Option and click save.You will get a notification if successful</p>
+               <br>
+               <p class="bold">For cases where an account type you have created is already in use ,Instead of deleting account Types, edit them as the records using them will automatically inherit the updated account type. Deleting will cause orphaned account type option customer records. To delete an Account Type in Editing click the X icon on a pill. (This is Discouraged is records are already bearing the account type, edit instead.)</p>
+               <br>
+               <img style="padding-left:7%" class="img-responsive zoom img-radii" src="/assets/docimages/admin-account-type-editing.PNG" alt="">   
+               <br>
+               <p class="bold">After editing ensure to click save button</p>
+               <br>
+               <p class="bold">Note That the Steps outlined in this section applies to all the rest sections. Basically the same process for creating a option and editing .</p>
+               <br>
+               <p class="bolder"><b>Customer Bounded Fields</b></p>
+               <br>
+               <p class="bold">The Account Type through CAAD VAT options are configured in this page. The Account Type up until Service Band are used for creqting new and editing existing options for some of the the customer fields. <br> This section will demonstrate creating and editing new Account Type options for the Account Type section, The same step will also apply to all other sections on this page.</p>
+               <img style="padding-left:7%" class="img-responsive zoom img-radii" src="/assets/docimages/admin-users.PNG" alt="">   
+               <br>
+               <p class="bold">Expand the admin section on the navigation bar and click on Admin settings link, the page below will be displayed.<br>.There are two Settings Tabs here 1: Customers 2: Users , clicking on users present a different tab from the tab presented below. The Customer Settings Tab is presented by default as you would notice the Customers tab is highlighted in Orange color.</p>
+               <br>
+               <p class="bolder"><b>User Bounded Fields</b></p>
+               <br>
+               <p class="bolder"><b>Create User Positions</b></p>
+               <br>
+               <img style="padding-left:7%" class="img-responsive zoom img-radii" src="/assets/docimages/admin-users-landing.PNG" alt="">   
+               <br>
+               <p class="bold">To create a new user position ,In the Positions section ,click the Add button, the modal below will pop up</p>
+               <br>
+               <img style="padding-left:7%" class="img-responsive zoom img-radii" src="/assets/docimages/admin-new-position-modal-null.PNG" alt=""> 
+               <br>
+               <p class="bold">In the first input enter the name of the position e.g Business Hub Manager</p>
+               <br>
+               <p class="bold">In the next input enter the code of the position and press ENTER e.g BHM. From the dropdown below select the type of task the position will handle such as CAAD Approvals, Customer Creation etc.</p>
+               <br>
+               <img style="padding-left:7%" class="img-responsive zoom img-radii" src="/assets/docimages/admin-new-position-filled.PNG" alt=""> 
+               <br>
+               <p class="bold">Click the save button to create the new position. This new option should now appear in the Admin Users Position dropdown</p>
+               <br>
+               <p class="bolder"><b>Customer Creation</b></p>
+               <br>
+               <p class="bold">Note that the steps below also apply in like manner to the rest of the sections on this tab</p>
+               <br>
+               <p class="bold">To assign a position to create customers, Select a position from the dropdown it the customer creation section. Within the pill that appears is an Input field, enter a Precedence code of 1 if this is the first , 2 if its the second and so on. You can repeat this process to add multiple positions that can create customers<br>Click the Save Roles button for this section</p>
+               <br>
+               <img style="padding-left:7%" class="img-responsive zoom img-radii" src="/assets/docimages/admin-create-customer-role.PNG" alt=""> 
+               <br>
+               <p class="bold">Click the X button on the pill to delete the role</p>
+               <br>
+               <p class="bold">The steps outline here apply to all other sections in this tab</p>
+               <br>
+         </div>
+      </div>
+      <div class="accordion-item">
+         <a href="#" class="accordion-head " data-bs-toggle="collapse" data-bs-target="#accordion-admin-item-2">
+            <h6 class="title">Manage Users</h6>
+            <span class="accordion-icon"></span>      
+         </a>
+         <div class="accordion-body " id="accordion-admin-item-2" data-bs-parent="#accordion-admin">
+            <div class="accordion-inner">
+               <p class="bold"><b>This section deals with managing users accounts</b></p>
+               <p class="bold">Expand the admin section on the navigation bar and click on <strong>Manage Users</strong> link, the page below will be displayed.</p>
+               <br>
+               <img id="admin-users-list" style="padding-left:7%" class="img-responsive zoom img-radii" src="/assets/docimages/admin-users-page.PNG" alt=""> 
+               <br>
+               <p class="bold"><b>Create New User</b></p>
+               <br>
+               <br>
+               <p class="bold">There are two types of Admin users 1: Base Admin Users 2: Elevated Admin User (only one user bears this account and will be created upon request from Ibedc Team)</p>
+               <br>
+               <p class="bold">For an admin user without Base Admin User , the modal appears with some missing 2fa widgets, the Elevated Admin User is able to propagate or assign other users with the ability to manage 2FA operations</p>
+
+               <br>
+               <p class="bold">The Image below is what is seen by Base Admin Users</p>
+               <br>
+               <img style="padding-left:7%" class="img-responsive zoom img-radii" src="/assets/docimages/admin-create-user-filled.PNG" alt=""> 
+               <br>
+               <p class="bold">The Image below is what is seen by Elevated Admin Users</p>
+               <br>
+               <img style="padding-left:7%" class="img-responsive zoom img-radii" src="/assets/docimages/admin-users-super-admin.PNG" alt="">
+               <br>
+
+               <p class="bold">Click the Create button as seen on the page above to create a new user. A side-drawn modal will pop out as seen below</p>
+               <br>
+               <img style="padding-left:7%" class="img-responsive zoom img-radii" src="/assets/docimages/admin-create-user-filled.PNG" alt="">
+               <br>
+               <p class="bold">Fullname and Email fields are mandatory fields, Enter a default password e.g 0000 or any password at all and confirm the password. 
+                  <br>In the Positions dropdown select the position this user will operate as.
+                  <br> Next for the can create dropdown Select an option. 
+                  <br>If Cant create users is selected the new user will not be able to create other users. 
+                  <br>If Can create is selected , this user account will have permission to create other users.
+                  <br><b>For the permissions checkboxes</b>
+                  <br>If Can create/Update is selected , this user account will have permission to create and edit other <strong>Customers</strong>.
+                  <br>If Can Approve Customer Creation is checked , this user account will have permission to Approve Customer Creation and Updates (CRMD) .
+                  <br>If Can Approve CAAD is checked , this user account will have permission to Approve CAAD Requests (CRMD) .
+                  <br>If Can Approve Manage 2FA is checked , this user account will have permission to manage 2fa on other users account .
+               </p>
+               <br>
+               <p class="bold">In the radio buttons below select the level at which the user will operate 
+                  <br>If Head Quarters is selected , this user will be marked as an HQ user having the ability to view records on the cms from all regions and lower hierarchies.
+                  <br>If Regional is selected , a dropdown appears select the region under which this user will operate, this user will have the ability to view records on the cms from only that chosen region and lower hierarchies.
+                  <br>If Business Unit is selected , 2 dropdowns appears select the region first then business hub under which this user will operate, this user will have the ability to view records on the cms from only that chosen Business Unit and lower hierarchies.
+                  <br>If Service Center is selected , 3 dropdowns appears select the region first then business hub followed by the service center under which this user will operate, this user will be marked as an Service Center user having the ability to view records on the cms from that particular service center 
+               </p>
+               <br>
+               <p class="bold">Select appropriate permissions based on admin type and click create user</p>
+               <br>
+               <p class="bold"><b>Edit Users</b></p>
+               <br>
+               <br>
+               <p class="bold">To disable/Enable a user toggle the user Icon (Red highlited)</p>
+               <br>
+               <p class="bold">To disable/Enable multiple users Select the users with the checkboxes at the far left of each record and click the Actions Dropdown (Blue highlited) and select an action to perform. Either Enable or Disable</p>
+               <br>
+               <p class="bold">To edit a user hover on a record as shown below in the image, click the edit Icon (Black highlighted) and a similar modal as the Create User Side-drawn modal will pop out with all available user's details pre-filled in the form. Edit the form as neccesary and click Update User button to save.</p>
+               <br>
+               <img style="padding-left:7%" class="img-responsive zoom img-radii" src="/assets/docimages/admin-edit-user-filled.PNG" alt="">
+               <br>
+               <p class="bolder"><b>2FA Authentication </b></p>
+               <br>
+               <p class="bold">To Enable 2FA on a user's account check the Enable 2FA Checkbox at the bottom of the form, Uncheck to disable 2FA Authentication for the user.</p>
+               <br>
+               <p class="bold">To Reset a User's Account with 2FA Steps already completed, click the red Clear 2FA Credentials button at the bottom of the page. The user will have to rescan the QRCode as described in Authentication section of the Users Guide. </p>   
+         </div>
+      </div>
+      <div class="accordion-item">
+         <a href="#" class="accordion-head " data-bs-toggle="collapse" data-bs-target="#accordion-item-3">
+            <h6 class="title">Manage Locations</h6>
+            <span class="accordion-icon"></span>      
+         </a>
+         <div class="accordion-body " id="accordion-item-3" data-bs-parent="#accordion" >
+            <div class="accordion-inner">
+               <p class="bold"><b>This section deals with managing Regions, Business Units and Service Centers</b></p>
+               <p class="bold">Expand the admin section on the navigation bar and click on <strong>Manage Locations</strong> link, the page below will be displayed.</p>
+               <br>
+               <img id="" style="padding-left:7%" class="img-responsive zoom img-radii" src="/assets/docimages/admin-locations.PNG" alt=""> 
+               <br>
+               <p class="bold"><b>Create New Location</b></p>
+               <br>
+
+               <p class="bold">Click the Create Button on the page, a side-drawn modal will pop out, fill in the relevant information and save</p>
+               <br>
+               <img id="" style="padding-left:7%" class="img-responsive zoom img-radii" src="/assets/docimages/admin-locatios-form-create.PNG" alt=""> 
+               <p class="bold"><b>Edit Location</b></p>
+               <br>
+               <p class="bold">Hover on a row , an edit Icon will show up, click on the Edit Icon, a side-drawn modal will pop out, edit the relevant information and save</p>
+               <br>
+               <img id="" style="padding-left:7%" class="img-responsive zoom img-radii" src="/assets/docimages/admin-locatios-form.PNG" alt=""> 
+            </div>
+         </div>
+      </div>
+      <a  name="contact"></a> -->
+      
+      <script src="/assets/js/jquery.js"></script>
+      <script src="/assets/js/bootstrap.min.js"></script>
+   
+   </div>

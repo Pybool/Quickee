@@ -1,0 +1,141 @@
+<app-overlay *ngIf="display" align="left" [display]="display" ></app-overlay>
+<app-overlay id="header"  align="left"  >Some text</app-overlay>
+<div style="padding-top: 60px;" class="nk-content ">
+    <div id='parent_div' class="container-fluid">
+        <br>
+        
+        <div style="padding-top: 30px;" align = "left" class="row">
+            <div class="col-sm-5 mx-left">
+                <div >
+                    <!-- <alert align="left"></alert> -->
+                    
+                    <form  [formGroup]="form"  class="bin" #airtimeForm="ngForm"  (ngSubmit)="airtimeForm.form.valid"  >
+                        <h2 style="color:white;" class="text-left">Swiftpay Airtime purchase</h2>
+                        <hr style="background-color:white;">
+            
+                        <div class="email">
+                            <b><label style="color:white;" class="" for="network">Network provider:</label></b>
+                            <!-- <mat-icon>home</mat-icon> -->
+                            <!-- <input type="text" formControlName="network" class="form-control"  placeholder="Select network provider"/> -->
+                            <select class="form-control" formControlName="network" #network_select #networkSelected_select (change)='networkSelected(networkSelected_select.value)' required>
+                                <option value="" disabled selected hidden>Select a network...</option>
+                                
+                                <option *ngFor="let network of Networks;" name="network.public_id" [value]=[network.isp_name,network.api_provider]>{{network.isp_name}}</option>
+                            </select>
+                            <div class="alert-danger error" *ngIf="f.network.errors &&airtimeForm.submitted">
+                                <div class="error" *ngIf="f.network.errors.required">Network is required</div>  
+                            </div>
+
+                        </div>
+                        <div class="pass">
+                            <b><label style="color:white;" for="phone">Phone number:</label></b>
+                            <input type="text" formControlName="phone" class="form-control" required placeholder="Enter your phone number"/>
+                            <div class="alert-danger error" *ngIf="f.phone.errors">
+                                <div class="error" *ngIf="f.phone.errors.required &&airtimeForm.submitted">Phone is required</div> 
+                                <!-- <div *ngIf="f.phone.errors?.pattern">Mobile number is not 11 digit</div>  -->
+                                <div class="error"  *ngIf="f.phone.errors.validPhone && f.phone.dirty">Mobile number is not a valid Nigerian Number format</div>
+                                
+                            </div>
+                
+                            
+                        </div>
+
+                        <div class="pass">
+                            <b><label style="color:white;" for="amount">Amount:</label></b>
+                            <input type="text" formControlName="amount" class="form-control" required placeholder="Enter amount"/>
+                            <div class="alert-danger error" *ngIf="f.amount.errors ">
+                                <div class="error" *ngIf="f.amount.errors.required &&airtimeForm.submitted">Amount is required</div>  
+                                <div class="error"  *ngIf="f.amount.errors.validAmount && f.amount.dirty">Invalid amount, please enter Integer value not less than 100</div>
+                            </div>
+                        </div>
+                        <br>
+                        <select class="form-control"  required>
+                            <option value="" disabled selected hidden>Make plan</option>
+                            
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                        </select>
+                        <br>
+
+                        <button style="min-width: 210px;" (click)="addtocart()" type="submit" value="Add to cart" class="btn btn-success"><mat-icon style="color: white;" class="material-icons">add_shopping_cart</mat-icon>&nbsp;&nbsp; Add to cart</button> &nbsp;&nbsp;
+                        <input style="min-width: 210px;" (click)="directrecharge()" class="btn btn-primary text-center" value="Direct recharge">&nbsp;&nbsp;
+                        
+                        <!-- <input style="min-width: 200px;" routerLink="payment" (click)="loadPaymentData('orderid')" class="btn btn-primary text-center" value="Submit"> -->
+                        <br>
+                        <br>
+                        <br>
+                    </form>
+                    <!-- <app-charts></app-charts> -->
+
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <p style="color: white; font-size: 19px;" class="text-center">Buy Airtime Online at Discount Prices for all Mobile Networks (MTN, Glo, Airtel & 9mobile) in Nigeria. Buy Recharge Card PINS Online. Instant Delivery!</p>
+
+        <div class="example-container mat-elevation-z8">
+            <h1 style="font-size:22px!important; color: white;"><mat-icon (click)="getairtimehistory()" style="font-size:22px!important; color: white;" class="material-icons swell">history</mat-icon>&nbsp;&nbsp; Airtime Transaction History</h1>
+            <!-- <div class="example-header">
+                <mat-form-field style="color:white!important;">
+                <input style="color:white!important;" matInput (keyup)="applyFilter($event.target)" placeholder="Filter">
+                </mat-form-field>
+            </div> -->
+            <mat-table  #table [dataSource]="dataSource" matSort>
+                
+            <ng-container matColumnDef="network">
+                <mat-header-cell style="color: white;" mat-header-cell *matHeaderCellDef mat-sort-header> Network &nbsp;
+                        <mat-form-field style="padding-left:10px; color:white!important;">
+                        <input style=" padding-left:10px; border-width:1px; border-color:white!important;" matInput (keyup)="applyFilter($event.target)" placeholder="Filter">
+                        </mat-form-field>
+                </mat-header-cell>
+                <mat-cell style="font-size: 20px;" *matCellDef="let element"> {{element.network.split(",")[0] | titlecase }} </mat-cell>
+            </ng-container>
+            
+            <ng-container matColumnDef="recipient">
+                <mat-header-cell style="color: white;" mat-header-cell *matHeaderCellDef mat-sort-header> <b>Recipient</b> </mat-header-cell>
+                <mat-cell style="font-size: 16px;" *matCellDef="let element"> {{element.recipient}} </mat-cell>
+            </ng-container>
+            
+            <ng-container matColumnDef="amount">
+                <mat-header-cell style="color: white;" mat-header-cell *matHeaderCellDef mat-sort-header> <b>Amount</b> </mat-header-cell>
+                <mat-cell style="font-size: 16px;" *matCellDef="let element">NGN {{element.amount}} </mat-cell>
+            </ng-container>
+            
+            <ng-container matColumnDef="date_time">
+                <mat-header-cell style="color: white;" mat-header-cell *matHeaderCellDef mat-sort-header> <b>Date time</b> </mat-header-cell>
+                <mat-cell  style="color: #085174 ; font-size: 16px;" *matCellDef="let element"> {{element.date_time}} </mat-cell>
+            </ng-container>
+
+            <ng-container  matColumnDef="status">
+                <mat-header-cell mat-header-cell *matHeaderCellDef> <b>Status</b> </mat-header-cell>
+                    <ng-container *matCellDef="let element" >
+                        <mat-cell style="color: red;font-size: 16px;" *ngIf="element.status=='---';" ><b> ---</b> </mat-cell>
+                        <mat-cell style="color: #085174 ; font-size: 16px;" style="color: green;" *ngIf="element.vend_status;" ><b>Completed</b>  </mat-cell>
+                        <mat-cell style="color: red;font-size: 16px;" *ngIf="element.vend_status==false ;"> <a  style="text-decoration: none;" href="javascript:void(0)" (click) = ResolvePending(element.order_id,element)><b>Pending</b></a>&nbsp;&nbsp;
+                            <div class="spinner">
+                                <!-- <a href="javascript:void(0)" style="color: greenyellow;" class="no_dec_sm"  (click) = ViewReservation(order.proc__id,order)> -->
+                                <span style="width: 20px;height: 20px;" class="spinner-border text-warning"></span>
+                        
+                            </div>
+                        </mat-cell>
+                    </ng-container>
+            </ng-container>
+            
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+            <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+        
+        </div>
+        <br>
+        <br>
+        <!-- <app-alert></app-alert> -->
+
+    
+        <!-- </div> -->
+        
+
+    </div>
+</div>

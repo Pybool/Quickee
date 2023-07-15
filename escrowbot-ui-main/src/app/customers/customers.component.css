@@ -1,0 +1,39 @@
+.customertable-wrapper{
+    padding-top: 100px;
+    padding-left:60px;
+}
+
+/* Default styles */
+#table-wrapper {
+    overflow-x: auto; /* Enable horizontal scrolling for large tables */
+    padding-top: 100px;
+    padding-left:60px;
+  }
+  
+  /* Responsive styles */
+  @media screen and (max-width: 768px) {
+    #table-wrapper {
+      overflow-x: scroll; /* Enable horizontal scrolling for small screens */
+    }
+  
+    table.mat-table {
+      width: 100%; /* Set the table width to 100% for small screens */
+    }
+  
+    /* Hide columns that don't fit on small screens */
+    table.mat-table th, table.mat-table td {
+      display: none;
+    }
+  
+    table.mat-table th.mat-header-cell:first-child,
+    table.mat-table td.mat-cell:first-child {
+      display: table-cell; /* Always display the first column */
+    }
+  
+    /* Show columns on click of the hamburger icon */
+    table.mat-table.show-columns th.mat-header-cell,
+    table.mat-table.show-columns td.mat-cell {
+      display: table-cell;
+    }
+  }
+  

@@ -1,0 +1,48 @@
+<div id="roots">
+    <div id="header" class="modal-header">
+        <h1 id="modalheader" style="font-size: 30px; color:white;" class="text-center">Create New Plan</h1>&nbsp;&nbsp;
+        <a type="button" class="close" data-dismiss="modal" (click)="activeModal.close('dismiss')">
+            <div aria-hidden="true">&times;</div>
+        </a>
+    </div>
+    <h2 id="modalactionheader" style="padding-top:3px; padding-left:30px; font-size: 18px; color:#3d740d;" class="text-left"></h2>
+    <div id="parent_div" class="modal-body">
+        <form [formGroup]="customerForm" (ngSubmit)="createCustomer()">
+            
+            <br>
+            <input class="form-control-lg" formControlName="firstname" type="text" required autocomplete="off" placeholder="Enter first name"/>
+            <br>
+            <br>
+            <input class="form-control-lg" formControlName="lastname" type="text" required autocomplete="off" placeholder="Enter last name"/>
+            <br>
+            <br>
+            <input class="form-control-lg" formControlName="email" type="text" required autocomplete="off" placeholder="Enter Email"/>
+            <br>
+            <br>
+            <input class="form-control-lg" formControlName="phonenumber" type="phone" autocomplete="off" required placeholder="Enter phone number"/>
+            <br>
+            <br>
+            <input class="form-control-lg" formControlName="iuc_number" type="phone" autocomplete="off" placeholder="Enter IUC number for cable"/>
+            <br>
+            <br>
+            <input class="form-control-lg" formControlName="meter_number" type="phone" autocomplete="off" placeholder="Enter meter number for electricity"/>
+            <br>
+            <br>
+        
+            <button class="btn btn-primary zoom" type="submit">Create Customer</button>
+        </form>
+    </div>
+    <div style="background-color: white;" class="modal-footer ">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                </div>
+                <div class="col-sm-3">
+                </div>
+                <div class="col-sm-3">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

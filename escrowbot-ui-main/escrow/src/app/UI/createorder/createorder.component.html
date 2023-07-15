@@ -1,0 +1,136 @@
+<div class="container" style="padding-top:100px;padding-left: 10px;padding-right: 10px; " >
+    <div style="padding-top: 20px;" class="title">
+        <h2 class="glass-initial" style="color:white;padding-top: 10px!important;padding-bottom:10px">New Order Quotation</h2>
+    </div>
+  <div id="payment-row-container" class="flex-row col-12">
+    
+    <form style="margin-top:10px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;" id="order-form" class="form-validate is-alter card card-bordered col-8 glass-initial" autocomplete="off" (ngSubmit)="submit()" ngNativeValidate>
+      <label>
+        <span class="fname">Buyer Username <span class="required">*</span></span>
+        <input style="width:100%;" (keyup)="activatePayment()" disabled [(ngModel)]="newOrder.buyer_email" type="email" name="buyer_email">
+      </label>
+      <label>
+        <span class="lname">Seller Username <span class="required">*</span></span>
+        <input style="width:100%;" (ngModelChange)="userExists($event)" (keyup)="activatePayment()" [(ngModel)]="newOrder.seller_email" type="email" name="seller_email">
+        <div *ngIf="nonExistentVendor" class="input-error">This vendor does not exist</div>
+      </label>
+      <label>
+        <span>Unit <span class="required">*</span></span>
+        <input style="width:100%;" (keyup)="activatePayment()" (keyup)="computeAgreedtotal()" [(ngModel)]="newOrder.order_units" type="number" name="order_units">
+      </label>
+      <label>
+        <span>Unit Price <span class="required">*</span></span>
+        <div style="width:100%;" class="form-control-wrap">
+          <div class="form-text-hint"><span class="overline-title">NGN</span></div>
+          <input style="width:100%;" (keyup)="activatePayment()" (keyup)="computeAgreedtotal()" [(ngModel)]="newOrder.unit_price" type="number" name="unit_price" class="form-control" id="default-05" placeholder="Price of single unit">
+       </div>
+      </label>
+      <label style="width:100%;">
+        <span style="white-space: nowrap;" class="fname">Description(Optional)</span>
+        <textarea style="width:100%;" (keyup)="activatePayment()" class="form-control" [(ngModel)]="newOrder.description" style="width:95%;height:100px;" type="text" name="description" placeholder="Enter a description of atleast (10) characters for this Service Order"></textarea>
+      </label>
+      <!-- <div class="form-group flex-row file">
+        <label style="white-space: nowrap;" class="form-label" for="customFileLabel">Image Upload (Optional)</label>    
+        <div class="form-control-wrap">
+           <div class="form-file">
+              <input (keyup)="selectFiles($event)" [(ngModel)]="newOrder.image" type="file" class="form-file-input" name="image" id="customFile">            
+              <label class="form-file-label" for="customFile">Choose file</label>        
+            </div>
+        </div>
+     </div>
+     <br> -->
+     <br>
+    </form>
+
+    <div style="margin-top:10px;color:white!important;border-top-right-radius: 10px;border-bottom-right-radius: 10px;" class="Yorder col-4">
+      <table >
+        <tr>
+          <th colspan="2"><h4 style="color:white;">Your order</h4></th>
+        </tr>
+        <tr style="display:none;">
+          <td>GoodsUnits</td>
+          <td><input class="transparent units" disabled  type="number"/></td>
+        </tr>
+        <tr>
+          <td>AgreedTotal</td>
+          <td style="white-space: nowrap;"><b>NGN</b><input class="transparent agreedtotal" disabled value="0.00" type="number"/></td>
+        </tr>
+        <tr>
+          <td>Escrow Fee</td>
+          <td  style="white-space: nowrap;"><b>NGN</b><input class="transparent escrowfee" disabled  type="text"/></td>
+        </tr>
+      </table>
+      
+      <div style="max-height: 300px;  overflow-y: auto;">
+        <div class="custom-control custom-radio checked">
+          <input type="radio" (click)="setPaymentMode($event)" name="paymentchannel" value="Direct Bank Payment" id="customRadio1" checked="" class="custom-control-input paymentchannel">
+          <label class="custom-control-label" for="customRadio1">Direct Bank Transfer</label>
+        </div>
+        <br>
+          <p style="padding-left: 30px;"><small style="color:white;">Make your payment directly into our bank account.Your order will not be shipped until the funds have cleared in our account.</small></p>
+        <br>
+        <div class="custom-control custom-radio checked">
+          <input  type="radio" (click)="setPaymentMode($event)" name="paymentchannel" value="Debit Card" id="customRadio2" checked="" class="custom-control-input paymentchannel">
+          <label class="custom-control-label" for="customRadio2">Debit Card Payment</label>
+        </div>
+        <br>
+        <div class="custom-control custom-radio checked">
+          <input type="radio" (click)="setPaymentMode($event)" name="paymentchannel" value="Apple Pay" id="customRadio3" checked="" class="custom-control-input paymentchannel">
+          <label class="custom-control-label" for="customRadio3">Apple Pay</label>
+          <span>
+            <img src="https://cc6kwdr8.media.zestyio.com/article-2020-12-03-apple-pay-launch.png?height=1000&fit=bounds" alt="" width="50">
+            </span>
+        </div>
+        <br>
+        <div class="custom-control custom-radio checked">
+          <input type="radio" (click)="setPaymentMode($event)" name="paymentchannel" value="Google Pay" id="customRadio4" checked="" class="custom-control-input paymentchannel">
+          <label class="custom-control-label" for="customRadio4">Google Pay</label>
+          <span>
+            <img src="https://1000logos.net/wp-content/uploads/2023/03/Google-Pay-logo.png" alt="" width="50">
+            </span>
+        </div>
+      </div>
+      <button *ngIf="newOrder.payment_channel=='Debit Card'" class="paybtn" [disabled]="placeHolderActive" style="opacity:0.6" (click)="submit()">Place Order</button>
+      <google-pay-button style="opacity:0.6" *ngIf="newOrder.payment_channel=='Google Pay'"
+      environment="TEST"
+      buttonType="buy"
+      buttonColor="black"
+      [paymentRequest]="{
+        apiVersion: 2,
+        apiVersionMinor: 0,
+        allowedPaymentMethods: [
+          {
+            type: 'CARD',
+            parameters: {
+              allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+              allowedCardNetworks: ['AMEX', 'VISA', 'MASTERCARD']
+            },
+            tokenizationSpecification: {
+              type: 'PAYMENT_GATEWAY',
+              parameters: {
+                gateway: 'example',
+                gatewayMerchantId: 'exampleGatewayMerchantId'
+              }
+            }
+          }
+        ],
+        merchantInfo: {
+          merchantId: '12345678901234567890',
+          merchantName: 'Demo Merchant'
+        },
+        transactionInfo: {
+          totalPriceStatus: 'FINAL',
+          totalPriceLabel: 'Total',
+          totalPrice: '100.00',
+          currencyCode: 'USD',
+          countryCode: 'US'
+        }
+      }"
+      (loadpaymentdata)="onLoadPaymentData($event)"
+    ></google-pay-button>
+    </div><!-- Yorder -->
+   </div>
+  </div>
+
+  <app-stripe-payment *ngIf="startpayment"></app-stripe-payment>
+

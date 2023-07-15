@@ -1,0 +1,1 @@
+export let PaystackPop:any = 'default';
