@@ -1,0 +1,113 @@
+
+<div class="container glass-initial" style="margin-top:120px; padding-left: 10px;" >
+    <div class="title">
+        <div id="header" class="flex-end">
+            <h2 style="color:white;" class="text-left">Quickie Cable Purchase</h2>
+           
+        </div>
+    </div>
+  <div style="max-height: 70vh;overflow-y: auto;">
+    <div id='parent_div' class="container-fluid">
+        <div class="flex-row-end">
+            <div class="col-sm-5 mx-left">
+                <div>
+                    <!-- <alert align="left"></alert> -->
+                    <br>
+                    <form  [formGroup]="form"  class="bin" #cableForm="ngForm"   novalidate >
+                        <hr style="background-color:white;">
+                        <div class="alert-danger error" *ngIf="cableForm.submitted">
+                            <div class="error" *ngIf="isRecipientNotValidform==true">Cable details are not correct</div>  
+                        </div>
+    
+                        <div class="email">
+                            <b><label style="color:white;" class="" for="tv_provider">Cable provider:</label></b>
+                            <!-- <input type="text" formControlName="tv_provider" class="form-control"  placeholder="Select cable provider"/> -->
+                            <select class="form-control" formControlName="tv_provider" #provider_select (change)='onOptionsSelected(provider_select.value)'>
+                                <option value="" disabled selected hidden>Select cable provider...</option>
+                                
+                                <option *ngFor="let cable of Cables;" [value]="[cable.cabletv_name,cable.id]">{{cable.cabletv_name}}</option>
+                            </select>
+                            <div class="alert-danger error" *ngIf="f.tv_provider.errors &&cableForm.submitted">
+                                <div class="error" *ngIf="f.tv_provider.errors.required">Provider is required</div>  
+                            </div>
+    
+    
+                        </div>
+    
+                        <div class="pass">
+                            <b><label style="color:white;" for="bouquet">Bouquet:</label></b>
+                            <!-- <input type="text" formControlName="bouquet" class="form-control"  placeholder="Select Bouquet"/> -->
+                            <select id="bouquet_select" class="form-control" formControlName="bouquet" #bouquet_select (change)='onBouquetSelected(bouquet_select.value)'>
+                                <option value="0" disabled selected>Select Bouquet...</option>
+                                
+                                <option *ngFor="let bouquet of Bouquets;" [text]="bouquet.bouquet_name" [value]="bouquet.bouquet_code"  >
+                                <!-- <option *ngFor="let network of Networks;" name="network.public_id" [text]="network.isp_name" #networks_select (change)='onOptionsSelected(networks_select.name)'> -->
+                               <!-- <option class='option' >{{network.isp_name}}</option> -->
+                            </select>
+                            <div class="alert-danger error" *ngIf="f.bouquet.errors &&cableForm.submitted">
+                                <div class="error" *ngIf="f.bouquet.errors.required">Bouquet is required</div>  
+                            </div>
+                    
+                        </div>
+    
+                        <div class="pass">
+                            <b><label style="color:white;" for="iuc_no">Smartcard/IUC number:</label></b>
+                            <input type="text" formControlName="iuc_no" class="form-control"  placeholder="Enter your Smartcard/IUC number"/>
+                            <div class="alert-danger error" *ngIf="f.iuc_no.errors &&cableForm.submitted">
+                                <div class="error" *ngIf="f.iuc_no.errors.required">Smartcard number is required</div>  
+                            </div>
+                        
+                            
+                        </div>
+    
+                        <div class="pass">
+                            <b><label style="color:white;" for="phone">Phone number:</label></b>
+                            <input type="text" formControlName="phone" class="form-control"  placeholder="Enter your phone number"/>
+                            <div class="alert-danger error" *ngIf="f.phone.errors">
+                                <div class="error" *ngIf="f.phone.errors.required &&cableForm.submitted">Phone is required</div> 
+                                <!-- <div *ngIf="f.phone.errors?.pattern">Mobile number is not 11 digit</div>  -->
+                                <div class="error"  *ngIf="f.phone.errors.validPhone && f.phone.dirty">Mobile number is not a valid Nigerian Number format</div>
+                                
+                            </div>
+                            <p class="text-warning">Please ensure you submit a functional phone number here, especially if you are a visiting customer without an account on this platform!</p>
+    
+        
+                        </div>
+    
+                        <select class="form-control"  required>
+                            <option value="" disabled selected hidden>Make plan</option>
+                            
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                        </select>
+                        <br>
+                        <div>
+                            <button style="min-width: 210px;" (click)="directsubscription()" type="submit" value="Add to cart" class="btn btn-success"><mat-icon style="color: white;" class="material-icons">add_shopping_cart</mat-icon>&nbsp;&nbsp; Submit</button> &nbsp;&nbsp;
+                            <br>
+                            <div class="spinner" *ngIf="isRecipientNotValidform=='loading'">
+                                <br>
+                                <span style="width: 30px;height: 30px;" *ngIf="isRecipientNotValidform=='loading'" class="spinner-border text-warning">&nbsp;Verifying</span>
+    
+                            </div>
+                        </div>
+                        <br>
+                       
+                    </form>
+                    <!-- <app-charts></app-charts> -->
+    
+                </div>
+            
+            </div>
+            <img align = "right" class="img-responsive zoom img-radii mx-right" src="/assets/images/sattv.png" alt="">
+        </div>
+    
+        <br>
+        <p style="color: white; font-size: 19px;" class="text-center">Pay for your GOTv, DSTv & Startimes Decoder Cables Subscriptions Online in Nigeria. Get instant activation after payment.!</p>
+        
+        <br>
+        <br>
+    
+    
+    </div>
+</div>

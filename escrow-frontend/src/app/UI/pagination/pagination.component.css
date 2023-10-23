@@ -1,0 +1,11 @@
+.card-inner {
+    padding: 0px!important;
+    padding-bottom: 5px!important;
+}
+
+
+.flex-row{
+    display:flex;
+    flex-direction: row!important;
+    gap:5px;
+}

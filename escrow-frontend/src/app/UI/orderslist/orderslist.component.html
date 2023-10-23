@@ -1,0 +1,151 @@
+<div style="margin-top:120px; padding-left: 10px;" class="container glass-initial" >
+    <div class="title">
+        <div id="header" class="flex-end">
+            <div class="flex-col pc-header">
+                <h2 style="color:white">My Orders</h2>
+                <span style="white-space: nowrap;" class="text-info">You have placed {{total_count}} orders so far</span>
+            </div>
+            <div style="display: none!important;" class="flex-row pc-header">
+                <input id="search" (keydown.enter)="searchOrder($event)" type="search" placeholder="search...">
+                <select (change)="searchOrder($event,true)"  class="form-select pc">
+                    <option selected value="">Filter My Orders</option>
+                    <option value="processing">Processing</option>
+                    <option value="completed">Completed</option>
+                </select>
+                <div class="link" style="white-space: nowrap;">
+                    <a href="#" (click)="toggleListMode()"><span style="font-size: 30px;" class="fas fa-credit-card"></span></a>
+                </div>
+            </div>
+
+            <div style="display: none;" class="flex-row mobile-header">
+                <input id="search" (keydown.enter)="searchOrder($event)" type="search" placeholder="search...">
+                <select (change)="searchOrder($event,true)"  class="form-select pc">
+                    <option selected value="">Filter My Orders</option>
+                    <option value="processing">Processing</option>
+                    <option value="completed">Completed</option>
+                </select>
+                <div class="link" style="white-space: nowrap;">
+                    <a href="#" (click)="toggleListMode()"><span style="font-size: 30px;" class="fas fa-credit-card"></span></a>
+                </div>
+            </div>
+            <app-spinner *ngIf="showSearchSpinner"></app-spinner>
+            <!-- <button class="toggle-view btn btn-outline-light transparent" type="button" (click)="toggleListMode()">Toggle View</button> -->
+            
+        </div>
+    </div>
+  <div style="max-height: 50vh;overflow-y: scroll;">
+    <table *ngIf="listMode" style="max-height:10vh;background: white;" class="data-table-init is-seperate table-dark table-striped nk-tb-list transparent">
+        <thead class="table-light">
+            <th class="nk-tb-col">Seller mail</th>
+            <th class="nk-tb-col">Units</th>
+            <th class="nk-tb-col">Unitprice</th>
+            <th class="nk-tb-col">Amount</th>
+            <th class="nk-tb-col">Pay Channel</th>
+            <th class="nk-tb-col">Description</th>
+            <th class="nk-tb-col">Created date</th>
+            <th class="nk-tb-col">Order Status</th>
+            <th class="nk-tb-col">Payment Status</th>
+        </thead>
+        <tbody>
+            <tr class="nk-tb-item" *ngFor="let order of orders;">
+                <td class="nk-tb-col"><a id="{{order.seller_email}}" style="color:steelblue" href="javascript:void(0)" (click)="loadMerchantProfile($event)">{{order.seller_email}}</a></td>
+                <td class="nk-tb-col">{{order.order_units}}</td>
+                <td class="nk-tb-col" style="white-space: nowrap; ">₦ {{order.unit_price | number:'1.0-0'}}</td>
+                <td class="nk-tb-col" style="white-space: nowrap;">₦ {{order.agreed_price | number:'1.0-0'}}</td>
+                <td class="nk-tb-col">{{order.payment_channel}}</td>
+                <td class="nk-tb-col">{{order.description}}</td>
+                <td class="nk-tb-col">{{formatDate(order.created_at)}}</td>
+                <td ngClass="{{order.status}}" class="status nk-tb-col">{{order.status | titlecase}}</td>
+                <td class="status nk-tb-col">
+                    <a id="{{order.order_public_id}}" (click)="payVendor($event)" style="min-width:125px;width:auto;white-space: nowrap;" *ngIf="order.status == 'completed' && order.is_buyer_approved == false" href="#" class="btn btn-outline-success">Pay Vendor
+                        <sup *ngIf="order.complaints != ''">&nbsp;Reported</sup>
+                    </a>
+                    <a id="{{order.order_public_id}}" (click)="reportVendor($event)" style="width:130px;" *ngIf="order.status != 'completed' && order.is_buyer_approved == false && order.complaints == ''" href="#" class="btn btn-outline-warning">Report Vendor</a>
+                    <a id="{{order.order_public_id}}" (click)="showReport(order)"  style="width:130px;color:red!important" *ngIf="order.status != 'completed' && order.is_buyer_approved == false && order.complaints != ''" href="#" class="btn btn-outline-danger">Reported</a>
+                    <a disabled style="width:130px;color:white;" *ngIf="order.is_buyer_approved" href="#" class="btn btn-outline-default">Vendor Paid</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="!listMode" id="accordion-desktop" class="accordion">
+        <div style="margin-top: 7px;" *ngFor="let order of orders;" class="accordion-item">
+            <a style="background-color: #101924; color:whitesmoke;" id="{{order.order_public_id}}_accordion" href="javascript:void(0)" class="accordion-head" data-bs-toggle="collapse" (click)="toggleAccordion('accordion-item-' + order.order_public_id)">
+                <h6 *ngIf="order.description != ''" style="color:whitesmoke;" class="title">{{order.description}}</h6> 
+                <h6 *ngIf="order.description == ''" style="color:whitesmoke;" class="title">No description provided!</h6> 
+                <span class="accordion-icon"></span>      
+            </a>
+            <div class="accordion-body collapse" id="accordion-item-{{order.order_public_id}}" data-bs-parent="#accordion">
+                <div class="accordion-inner">
+                    <ul id="basic-info" style="max-height:50vh;overflow-y: auto;" class="link-list-opt">
+                        <li ><div class="col-12 row g-3"><label class="col-6">Seller Email </label><a class="col-6" href="javascript:void(0)" ><span>{{order.seller_email}}</span></a></div></li>
+                        <li ><div class="col-12 row g-3"><label class="col-6">Units </label><a class="col-6" href="javascript:void(0)" ><span>{{order.order_units}}</span></a></div></li>
+                        <li ><div class="col-12 row g-3"><label class="col-6">Unit Price</label><a class="col-6" href="javascript:void(0)" ><span>₦ {{order.unit_price | number:'1.0-0'}}</span></a></div></li>
+                        <li ><div class="col-12 row g-3"><label class="col-6">Total Price </label><a class="col-6" href="javascript:void(0)" ><span>₦ {{order.agreed_price | number:'1.0-0'}}</span></a></div></li>
+                        <li ><div class="col-12 row g-3"><label class="col-6">Date </label><a class="col-6" href="javascript:void(0)" ><span style="white-space: nowrap;">{{formatDate(order.created_at)}}</span></a></div></li>
+                        <li ><div class="col-12 row g-3"><label class="col-6"> Status</label><a class="col-6" href="javascript:void(0)" ><span ngClass="{{order.status}}">{{order.status | titlecase}}</span></a></div></li>
+                        <li style=" border-radius: 10px;">
+                            <div style="margin-top: 2px;margin-left: 5px;" class="col-12 row g-3">
+                                <a id="{{order.order_public_id}}" (click)="payVendor($event)" style="min-width:125px;width:auto;white-space: nowrap;" *ngIf="order.status == 'completed' && order.is_buyer_approved != true" href="#" class="btn btn-outline-success">Pay Vendor
+                                    <sup *ngIf="order.complaints != ''">&nbsp;Reported</sup>
+                                </a>
+                                <a id="{{order.order_public_id}}" (click)="reportVendor($event)" style="width:130px;" *ngIf="order.status != 'completed' && order.is_buyer_approved != true && order.complaints == ''" href="#" class="btn btn-outline-warning">Report Vendor</a>
+                                <a id="{{order.order_public_id}}" (click)="showReport(order)" style="width:130px;color:red!important" *ngIf="order.status != 'completed' && order.is_buyer_approved == false && order.complaints != ''" href="#" class="btn btn-outline-danger">Reported</a>
+                                <a disabled style="width:130px;color:white;" *ngIf="order.is_buyer_approved" href="#" class="btn btn-outline-default">Vendor Paid</a>
+                            </div>
+                            <br>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- For Mobile view -->
+    <div style="display:none;" id="accordion-mobile" class="accordion">
+        <div style="margin-top: 7px;" *ngFor="let order of orders;" class="accordion-item">
+            <a style="background-color: #101924; color:whitesmoke;" id="{{order.order_public_id}}_accordion" href="javascript:void(0)" class="accordion-head" data-bs-toggle="collapse" (click)="toggleAccordion('accordion-item-' + order.order_public_id)">
+                <h6 *ngIf="order.description != ''" style="color:whitesmoke;" class="title">{{order.description}}</h6> 
+                <h6 *ngIf="order.description == ''" style="color:whitesmoke;" class="title">No description provided!</h6> 
+                <span class="accordion-icon"></span>      
+            </a>
+            <div class="accordion-body collapse" id="accordion-item-{{order.order_public_id}}" data-bs-parent="#accordion">
+                <div class="accordion-inner">
+                    <ul id="basic-info" style="max-height:50vh;overflow-y: auto;" class="link-list-opt">
+                        <li ><div class="col-12 row g-3"><label class="col-6">Seller Email </label><a class="col-6" href="javascript:void(0)" ><span>{{order.seller_email}}</span></a></div></li>
+                        <li ><div class="col-12 row g-3"><label class="col-6">Units </label><a class="col-6" href="javascript:void(0)" ><span>{{order.order_units}}</span></a></div></li>
+                        <li ><div class="col-12 row g-3"><label class="col-6">Unit Price</label><a class="col-6" href="javascript:void(0)" ><span>₦ {{order.unit_price | number:'1.0-0'}}</span></a></div></li>
+                        <li ><div class="col-12 row g-3"><label class="col-6">Total Price </label><a class="col-6" href="javascript:void(0)" ><span>₦ {{order.agreed_price | number:'1.0-0'}}</span></a></div></li>
+                        <li ><div class="col-12 row g-3"><label class="col-6">Date </label><a class="col-6" href="javascript:void(0)" ><span style="white-space: nowrap;">{{formatDate(order.created_at)}}</span></a></div></li>
+                        <li ><div class="col-12 row g-3"><label class="col-6"> Status</label><a class="col-6" href="javascript:void(0)" ><span ngClass="{{order.status}}">{{order.status | titlecase}}</span></a></div></li>
+                        <li style=" border-radius: 10px;">
+                            <div style="margin-top: 2px;margin-left: 5px;" class="col-12 row g-3">
+                                <a id="{{order.order_public_id}}" (click)="payVendor($event)" style="min-width:125px;width:auto;white-space: nowrap;" *ngIf="order.status == 'completed' && order.is_buyer_approved != true" href="#" class="btn btn-outline-success">Pay Vendor
+                                    <sup *ngIf="order.complaints != ''">&nbsp;Reported</sup>
+                                </a>
+                                <a id="{{order.order_public_id}}" (click)="reportVendor($event)" style="width:130px;" *ngIf="order.status != 'completed' && order.is_buyer_approved != true && order.complaints == ''" href="#" class="btn btn-outline-warning">Report Vendor</a>
+                                <a id="{{order.order_public_id}}" (click)="showReport(order)"  style="width:130px;color:red!important" *ngIf="order.status != 'completed' && order.is_buyer_approved == false && order.complaints != ''" href="#" class="btn btn-outline-danger">Reported</a>
+                                <a disabled style="width:130px;color:white;" *ngIf="order.is_buyer_approved" href="#" class="btn btn-outline-default">Vendor Paid</a>
+                            </div>
+                            <br>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="text-align: center;width:100%;color:white" *ngIf="orders.length==0">Refresh the page to load content</div>
+    <app-spinner *ngIf="showSpinner"></app-spinner>
+    
+   </div>
+   <p class="bottom-text">If you can't find an order you just placed, it could mean your payment has not been confirmed, refresh the page intermitently.</p>
+
+   <app-pagination (dataEvent)="receivePaginationData($event)"></app-pagination>
+  </div>
+
+  <app-merchantprofile *ngIf="showmerchantprofile"></app-merchantprofile>
+  <app-vendorpaymentpin  *ngIf="vendorPinModal"></app-vendorpaymentpin>
+  <app-reportvendor *ngIf="reportVendorModal"></app-reportvendor>
+
+  
+

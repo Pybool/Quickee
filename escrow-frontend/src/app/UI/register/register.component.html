@@ -1,0 +1,80 @@
+<div style="padding-top: 100px;" class="container">
+    <div class="interior">
+    </div>
+    </div>
+  <div style="margin-bottom: 80px;" id="open-modal" class="modal-window">
+    <div class="title wmodal">
+      <a href="#" title="Close" class="modal-close">Close</a>
+      <h1>Signup!</h1>
+      <br>
+      <form action="/charge" method="post" id="payment-form">
+        <div class="form-row">
+            <div id="login-form" #cardInfo>
+                <form (ngSubmit)="register()" #registerForm="ngForm">
+                  <div>
+                    <label for="bankname">Bank Name</label>
+                    <select style="color:white!important;background-color:none!important;" class="form-select" id="bankname" name="bankname" [(ngModel)]="user.bankname" required>
+                      <option value="Select Bank Name">Select Bank Name</option>
+                      <option *ngFor="let bank of banks;">{{bank}}</option>
+                    </select>
+                    <div class="alert-danger error" *ngIf="isInvalidBankName()" >
+                      <div class="error">No valid bank was selected</div>
+                    </div>
+                  </div>
+                  <div>
+                    <label for="accountno">Account No:</label>
+                    <input placeholder="Enter your bank account number" class="form-control" type="text" id="accountno" name="accountno" [(ngModel)]="user.accountno" required>
+                    <div class="alert-danger error" *ngIf="requirederrors('accountno')" >
+                      <div class="error" *ngIf="requirederrors('accountno')">A bank account number is required</div>
+                    </div>
+                    <div class="alert-danger error" *ngIf="isInvalidAccountNo()" >
+                      <div class="error">A Nigerian bank account number is rarely or never less than 9 digits</div>
+                    </div>
+                  </div>
+                    <div>
+                      <label for="email">Email:</label>
+                      <input placeholder="Enter your active email address" class="form-control" type="email" id="email" name="email" [(ngModel)]="user.email" required>
+                      <div class="alert-danger error" *ngIf="requirederrors('email')" >
+                        <div class="error" *ngIf="requirederrors('email')">An email address is required</div>
+                      </div>
+                      <div class="alert-danger error" *ngIf="isInvalidEmail()" >
+                        <div class="error">A valid email address is required</div>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <label for="password">Password:</label>
+                      <input placeholder="Enter your password" class="form-control" type="password" id="password" name="password" [(ngModel)]="user.password" required>
+                      <div class="alert-danger error" *ngIf="requirederrors('password')" >
+                        <div class="error" *ngIf="requirederrors('password')">A password is required</div>
+                      </div>
+                      <div class="alert-danger error" *ngIf="isInvalidPassword()" >
+                        <div class="error">password must be (At least 8 characters long, has at least 2 uppercase letters, 3 lowercase letters, and at least 1 special character and atleast 2 numbers)</div>
+                      </div>
+                      
+                    </div>
+                    <div>
+                      <label for="password-again">Password Again:</label>
+                      <input placeholder="Enter your password again" class="form-control" type="password" id="password-again" name="password" [(ngModel)]="user.passwordagain" required>
+                      <div class="alert-danger error" *ngIf="isPasswordMatch()" >
+                        <div class="error" *ngIf="isPasswordMatch()">Passwords must match</div>
+                      </div>
+                    </div>
+                  </form>
+            </div>
+            <!-- Used to display form errors -->
+            <div id="card-errors" role="alert"></div>
+        </div>
+        <button (click)="register()" class="btn btn-outline-secondary" type="submit" [disabled]="registerForm.invalid">Signup</button>
+        <br>
+        &nbsp;&nbsp;<span>Already have an account? <a href="/login">Login</a></span>
+      </form>
+      
+      <app-spinner *ngIf="showSpinner"></app-spinner>      
+    </div>
+ 
+  </div>
+  <br>
+  <br>
+  <br>
+  <a style="display:none;" id="payment-modal" class="btn" href="#open-modal">👋 Basic CSS-Only Modal</a>

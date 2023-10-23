@@ -1,0 +1,9 @@
+<div _ngcontent-ltp-c55="" class="card-inner">
+    <ul _ngcontent-ltp-c55="" class="pagination justify-content-center justify-content-md-start">
+        <ng-container *ngFor="let link of displayedPages">
+            <li style="background-color: transparent;"  _ngcontent-ltp-c55="" class="page-item pointer"><a _ngcontent-ltp-c55="" *ngIf="link.page" (click)="nextPage($event,link.link,link.cmp)" [class.active]="link.page === currentPage" class="page-link">{{link.page}}</a></li>
+        </ng-container>
+        <li style="background-color: transparent;" *ngIf="!showLessClicked && displayedPages.length < links.length" (click)="loadMoreLinks()" _ngcontent-ltp-c55=""  class="page-item pointer"><span _ngcontent-ltp-c55="" class="page-link pointer"><em _ngcontent-ltp-c55="" class="icon ni ni-arrow-from-right"></em></span></li>
+        <li style="background-color: transparent;"  *ngIf="displayedPages.length >= 5" (click)="showLessLinks()" _ngcontent-ltp-c55=""  class="page-item pointer"><span _ngcontent-ltp-c55="" class="page-link pointer"><em _ngcontent-ltp-c55="" class="icon ni ni-arrow-from-left"></em></span></li>
+    </ul>
+ </div>

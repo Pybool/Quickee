@@ -1,0 +1,69 @@
+services:
+  # Angular app frontend
+  angular-frontend:
+    build:
+      context:  ./escrow-frontend
+    container_name: escrow-frontend
+    restart: always
+    volumes:
+      - ./frontend:/escrow-frontend
+    working_dir: /home/app/escrow-frontend
+    command: npm start
+    ports:
+      - "4200:4200"
+    networks:
+      - app-network
+    expose:
+      - "4200"
+
+  # Django backend
+  django-backend:
+    build:
+      context:  ./escrow-backend
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn --certfile=/etc/certs/localhost.crt --keyfile=/etc/certs/localhost.key escrowbot.wsgi:application --bind 0.0.0.0:443"
+    container_name: escrow-backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./config/web/web-variables.env
+    volumes:
+      - ./code:/src
+      - ./config/nginx/certs/:/etc/certs
+    expose:
+      - "8000"
+  
+  django-celery:
+    build:
+        context:  ./escrow-backend
+    command: bash -c "celery -A escrowbot worker --loglevel=info -P eventlet"
+    container_name: escrow-backend-celery
+
+  django-celery-beat:
+    build:
+        context:  ./escrow-backend
+    command: bash -c "celery -A escrowbot beat --scheduler django_celery_beat.schedulers:DatabaseScheduler --loglevel=info"
+    container_name: escrow-backend-celery-beat
+
+  redis:
+    image: redis:latest
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - ./config/nginx/:/etc/nginx/conf.d
+    depends_on:
+      - django-backend
+
+volumes:
+  sqlite-data:
+
+networks:
+  app-network:
+    driver: bridge
+
+
+# openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out localhost.crt -keyout localhost.key

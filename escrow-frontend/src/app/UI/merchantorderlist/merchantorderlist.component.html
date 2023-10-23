@@ -1,0 +1,145 @@
+<div class="container glass-initial" style="margin-top:120px; padding-left: 10px;" >
+    <div class="title">
+        <div id="header" class="flex-end">
+            <div class="flex-col pc-header">
+                <h2 style="color:white">Waiting Orders</h2>
+                <span style="white-space: nowrap;" class="text-info">You have gotten {{total_count}} waiting orders so far</span>
+            </div>
+            <div class="flex-row pc-header">
+                <input id="search" (keydown.enter)="searchVendorList($event)" type="search" placeholder="search...">
+                <select (change)="searchVendorList($event,true)"  class="form-select pc">
+                    <option selected value="">Filter wait Orders</option>
+                    <option value="approved">Payment Approved</option>
+                    <option value="completed">Vendor Completed</option>
+                    <option value="pending">Payment Pending</option>
+                    <option value="processing">Vendor Processing</option>
+                </select>
+                <div class="link" style="white-space: nowrap;">
+                    <a href="#" (click)="toggleListMode()"><span style="font-size: 30px;" class="fas fa-credit-card"></span></a>
+                </div>
+            </div>
+
+            <div style="display: none!important;" class="flex-row mobile-header">
+                <input id="search" (keydown.enter)="searchVendorList($event)" type="search" placeholder="search...">
+                <select (change)="searchVendorList($event,true)"  class="form-select pc">
+                    <option selected value="">Filter wait Orders</option>
+                    <option value="approved">Payment Approved</option>
+                    <option value="completed">Vendor Completed</option>
+                    <option value="pending">Payment Pending</option>
+                    <option value="processing">Vendor Processing</option>
+                </select>
+                <div class="link" style="white-space: nowrap;">
+                    <a href="#" (click)="toggleListMode()"><span style="font-size: 30px;" class="fas fa-credit-card"></span></a>
+                </div>
+            </div>
+            <app-spinner *ngIf="showSearchSpinner"></app-spinner>
+        </div>
+    </div>
+  <div style="max-height: 50vh;overflow-y: auto;">
+    <table *ngIf="listMode" style="max-height:10vh;background: white;" class="data-table-init is-seperate table-striped nk-tb-list transparent">
+        <thead class="table-light">
+            <th class="nk-tb-col">Buyer mail</th>
+            <th class="nk-tb-col">Units</th>
+            <th class="nk-tb-col">Unitprice</th>
+            <th class="nk-tb-col">Amount</th>
+            <th class="nk-tb-col">Pay Channel</th>
+            <th class="nk-tb-col">Description</th>
+            <th class="nk-tb-col">Created date</th>
+            <th class="nk-tb-col">Payment Approved</th>
+            <th class="nk-tb-col">Order Status</th>
+        </thead>
+        <tbody>
+            <tr class="nk-tb-item" *ngFor="let order of orders;">
+                <td class="nk-tb-col"><a id="{{order.seller_email}}" style="color:steelblue" href="javascript:void(0)" (click)="loadMerchantProfile($event)">{{order.buyer_email}}</a></td>
+                <td class="nk-tb-col">{{order.order_units}}</td>
+                <td class="nk-tb-col" style="white-space: nowrap; ">₦ {{order.unit_price | number:'1.0-0'}}</td>
+                <td class="nk-tb-col" style="white-space: nowrap;">₦ {{order.agreed_price | number:'1.0-0'}}</td>
+                <td class="nk-tb-col">{{order.payment_channel}}</td>
+                <td class="nk-tb-col">{{order.description}}</td>
+                <td class="nk-tb-col">{{formatDate(order.created_at)}}</td>
+                <td *ngIf="!order.is_buyer_approved" class="status nk-tb-col text-warning">Pending <sup class="pointer" (click)="showReport(order)" *ngIf="order.complaints != ''">&nbsp;Reported</sup></td>
+                <td *ngIf="order.is_buyer_approved" class="status nk-tb-col text-success">Approved <sup *ngIf="order.complaints != ''">&nbsp;Reported</sup></td>
+                <td class="status nk-tb-col">
+                    <select [disabled]="order.is_buyer_approved" style="width:150px;" ngClass="{{order.status}}" value="{{order.status}}" (change)="doAction($event)" id="{{order.order_public_id}}" class="form-select">
+                        <option disabled  value="">Select</option>
+                        <option value="processing">Processing</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="!listMode" id="accordion-desktop" class="accordion">
+        <div style="margin-top: 7px;" *ngFor="let order of orders;" class="accordion-item">
+            <a style="background-color: #101924; color:whitesmoke;" id="{{order.order_public_id}}_accordion" href="javascript:void(0)" class="accordion-head" data-bs-toggle="collapse" (click)="toggleAccordion('accordion-item-' + order.order_public_id)">
+                <h6 *ngIf="order.description != ''" style="color:whitesmoke;" class="title">{{order.description}}</h6> 
+                <h6 *ngIf="order.description == ''" style="color:whitesmoke;" class="title">No description provided!</h6> 
+                <span class="accordion-icon"></span>      
+            </a>
+            <div class="accordion-body collapse" id="accordion-item-{{order.order_public_id}}" data-bs-parent="#accordion">
+                <div class="accordion-inner">
+                    <ul id="basic-info" style="max-height:50vh;overflow-y: auto;" class="link-list-opt">
+                        <li ><div class="col-12 row g-3"><label class="col-6">Buyer Email </label><a class="col-6" href="javascript:void(0)" ><span>{{order.buyer_email}}</span></a></div></li>
+                        <li ><div class="col-12 row g-3"><label class="col-6">Units </label><a class="col-6" href="javascript:void(0)" ><span>{{order.order_units}}</span></a></div></li>
+                        <li ><div class="col-12 row g-3"><label class="col-6">Unit Price</label><a class="col-6" href="javascript:void(0)" ><span>₦ {{order.unit_price | number:'1.0-0'}}</span></a></div></li>
+                        <li ><div class="col-12 row g-3"><label class="col-6">Total Price </label><a class="col-6" href="javascript:void(0)" ><span>₦ {{order.agreed_price | number:'1.0-0'}}</span></a></div></li>
+                        <li ><div class="col-12 row g-3"><label class="col-6">Date </label><a class="col-6" href="javascript:void(0)" ><span style="white-space: nowrap;">{{formatDate(order.created_at)}}</span></a></div></li>
+                        <li *ngIf="!order.is_buyer_approved" ><div class="col-12 row g-3"><label class="col-6">Payment Approval</label><a class="col-6" href="javascript:void(0)" ><span  class="text-warning" >Pending <sup class="pointer" (click)="showReport(order)" *ngIf="order.complaints != ''">&nbsp;Reported</sup></span></a></div></li>
+                        <li *ngIf="order.is_buyer_approved" ><div class="col-12 row g-3"><label class="col-6">Payment Approval</label><a class="col-6" href="javascript:void(0)" ><span  class="text-success" >Approved <sup *ngIf="order.complaints != ''">&nbsp;Reported</sup></span></a></div></li>
+                        <li ><div class="col-12 row g-3"><label class="col-6"> Status</label><a class="col-6" href="javascript:void(0)" ><span ngClass="{{order.status}}">{{order.status | titlecase}}</span></a></div></li>
+                        <li style=" border-radius: 10px;">
+                            <select [disabled]="order.is_buyer_approved"  style="margin-top:20px;width:150px;" ngClass="{{order.status}}" value="{{order.status}}" (change)="doAction($event)" id="{{order.order_public_id}}" class="form-select">
+                                <option selected value="">Select</option>
+                                <option value="processing">Processing</option>
+                                <option value="completed">Completed</option>
+                                <!-- <option value="complaint">Make complaint</option> -->
+                            </select>
+                            <br>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- For Mobile view -->
+    <div style="display:none;" id="accordion-mobile" class="accordion">
+        <div style="margin-top: 7px;" *ngFor="let order of orders;" class="accordion-item">
+            <a style="background-color: #101924; color:whitesmoke;" id="{{order.order_public_id}}_accordion" href="javascript:void(0)" class="accordion-head" data-bs-toggle="collapse" (click)="toggleAccordion('accordion-item-' + order.order_public_id)">
+                <h6 *ngIf="order.description != ''" style="color:whitesmoke;" class="title">{{order.description}}</h6> 
+                <h6 *ngIf="order.description == ''" style="color:whitesmoke;" class="title">No description provided!</h6> 
+                <span class="accordion-icon"></span>      
+            </a>
+            <div class="accordion-body collapse" id="accordion-item-{{order.order_public_id}}" data-bs-parent="#accordion">
+                <div class="accordion-inner">
+                    <ul id="basic-info" style="max-height:50vh;overflow-y: auto;" class="link-list-opt">
+                        <li ><div class="col-12 row g-3"><label class="col-6">Buyer Email </label><a class="col-6" href="javascript:void(0)" ><span>{{order.buyer_email}}</span></a></div></li>
+                        <li ><div class="col-12 row g-3"><label class="col-6">Units </label><a class="col-6" href="javascript:void(0)" ><span>{{order.order_units}}</span></a></div></li>
+                        <li ><div class="col-12 row g-3"><label class="col-6">Unit Price</label><a class="col-6" href="javascript:void(0)" ><span>₦ {{order.unit_price | number:'1.0-0'}}</span></a></div></li>
+                        <li ><div class="col-12 row g-3"><label class="col-6">Total Price </label><a class="col-6" href="javascript:void(0)" ><span>₦ {{order.agreed_price | number:'1.0-0'}}</span></a></div></li>
+                        <li ><div class="col-12 row g-3"><label class="col-6">Date </label><a class="col-6" href="javascript:void(0)" ><span style="white-space: nowrap;">{{formatDate(order.created_at)}}</span></a></div></li>
+                        <li *ngIf="!order.is_buyer_approved" ><div class="col-12 row g-3"><label class="col-6">Payment Approval</label><a class="col-6" href="javascript:void(0)" ><span  class="text-warning" >Pending <sup class="pointer" (click)="showReport(order)" *ngIf="order.complaints != ''">&nbsp;Reported</sup></span></a></div></li>
+                        <li *ngIf="order.is_buyer_approved" ><div class="col-12 row g-3"><label class="col-6">Payment Approval</label><a class="col-6" href="javascript:void(0)" ><span  class="text-success" >Approved <sup *ngIf="order.complaints != ''">&nbsp;Reported</sup></span></a></div></li>
+                        <li ><div class="col-12 row g-3"><label class="col-6"> Status</label><a class="col-6" href="javascript:void(0)" ><span ngClass="{{order.status}}">{{order.status | titlecase}}</span></a></div></li>
+                        <li style=" border-radius: 10px;">
+                            <select [disabled]="order.is_buyer_approved" style="margin-top:20px;width:150px;" ngClass="{{order.status}}" value="{{order.status}}" (change)="doAction($event)" id="{{order.order_public_id}}" class="form-select">
+                                <option selected value="">Select</option>
+                                <option value="processing">Processing</option>
+                                <option value="completed">Completed</option>
+                                <!-- <option value="complaint">Make complaint</option> -->
+                            </select>
+                            <br>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="text-align: center;width:100%;color:white" *ngIf="orders.length==0">Refresh the page to load content</div>
+    <app-spinner *ngIf="showSpinner"></app-spinner>
+  </div>
+  <p class="bottom-text">If you can't find an order you a buyer placed, it could mean the buyer's payment has not been confirmed, refresh the page intermitently.</p>
+  <app-pagination (dataEvent)="receivePaginationData($event)"></app-pagination>
+</div>
+<app-merchantprofile *ngIf="showmerchantprofile"></app-merchantprofile>

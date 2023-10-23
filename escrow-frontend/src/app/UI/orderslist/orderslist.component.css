@@ -1,0 +1,142 @@
+th{
+    color:white;
+    padding-left: 10px;
+}
+
+thead{
+    background-color: rgb(63, 81, 181);
+    height:50px;
+}
+
+label{
+    color: #b6c6e3;
+}
+
+div#header{
+    padding-top: 20px;
+}
+
+.pc-header{
+    display: block;
+}
+
+.mobile-header{
+    display: none!important;
+}
+
+/* div.accordion{
+    display:none;
+} */
+
+select.form-select{
+    height:40px;
+    width:50%;
+    margin-top: 20px;
+}
+
+.status{
+    color:orangered;
+}
+
+input[type="search"] {
+    width:50vh;
+    background: transparent;
+    border: 1px solid var(--color-light);
+    /* border-radius: 2rem; */
+    padding: 0.7rem 1.5rem;
+    color: white!important;
+    letter-spacing: 0.1rem;
+    margin-bottom: 2rem;
+  }
+
+  .processing{
+    color:orangered!important;
+  }
+  .completed{
+    color:rgb(75, 160, 75)!important;
+  }
+
+  .flex-row{
+    display: flex!important;
+    flex-direction: row!important;;
+    gap:10px!important;;
+}
+
+  @media screen and (min-width:260px) and (max-width:912px){
+    div#header{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .accordion-head .title {
+        font-size: 12px!important;
+
+    }
+
+    h2{
+        width: 40%;
+        font-size: large!important;
+    }
+
+    .bottom-text{
+        font-size: 10px!important;
+    }
+
+    .pc-header{
+        display: none;
+    }
+
+    .mobile-header{
+        display: block;
+    }
+
+    #search{
+        width:50%!important;
+        padding: 0px;
+        margin-bottom: 5px;
+    }
+
+    select.form-select{
+        margin-top: 7px;
+        margin-bottom: 7px;
+    }
+
+    table{
+        display: none!important;
+    }
+
+    div#accordion-desktop{display: none !important; }
+
+    div#accordion-mobile{
+        display:block!important;
+
+        
+    }
+    div.accordion{
+        display:block;
+    }
+
+    .toggle-view{
+        display: none!important;
+    }
+
+    a.btn{
+        color:black!important;
+        background: white;
+    }
+
+    a h6{
+        font-weight: bolder;
+        text-transform: capitalize;
+        
+    }
+
+    label{
+        color: #b6c6e3;
+    }
+
+    
+
+}
+  
+  

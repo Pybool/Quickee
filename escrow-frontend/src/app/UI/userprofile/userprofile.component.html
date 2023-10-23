@@ -1,0 +1,146 @@
+
+
+<div class="mat-card container ">
+    <mat-card >
+      <div style="padding-left: 30px;" class="title">
+        <div id="header" class="flex-end">
+            <div class="flex-col">
+                <h2 style="color:white">My Profile</h2>
+            </div>
+        </div>
+      </div>
+      <mat-toolbar class="transparent">
+        <div class="md-toolbar-tools flex-end">
+          <h2>
+            <span *ngIf="!showSpinner" id="username" style="color:white;text-transform: uppercase;">{{username}}</span>
+            <app-spinner *ngIf="showSpinner"></app-spinner>
+          </h2>
+          <button mat-icon-button *ngIf="viewMode" (click)="editprofile()">
+            <mat-icon matTooltip="Edit Profile">mode_edit</mat-icon>
+          </button>
+          <button mat-icon-button *ngIf="!viewMode" (click)="editprofile('save'); saveChanges()">
+            <mat-icon matTooltip="Save Changes">save</mat-icon>
+          </button>
+          <mat-menu matMenu>
+            <button mat-icon-button >
+              <mat-icon matTooltip="More Options">more_vert</mat-icon>
+            </button>
+            <ng-template matMenuContent>
+              <button mat-menu-item (click)="deleteUser()">
+                <mat-icon>delete</mat-icon>
+                Delete User
+              </button>
+              <button mat-menu-item (click)="resetPassword()">
+                <mat-icon>replay</mat-icon>
+                Reset Password
+              </button>
+            </ng-template>
+          </mat-menu>
+        </div>
+      </mat-toolbar>
+      <mat-card-content style="margin-bottom: 1050px!important;"  class="glass-initial" fxLayout.sm="column" fxLayout.gt-sm="row"> 
+        <div class="user flex-row-40" fxLayout.sm fxLayout.gt-sm="column">
+          <div style="width:auto" class="flex-col glass-initial">
+              <img id="previewImage" style="margin-top:10px;margin-left: 10px;" [src]="imageUrl" alt="user avatar" class="user-avatar" />
+              <form  enctype="multipart/form-data">
+                <input id="photo_camera" type="file" (change)="onFileSelected($event)" mat-icon-button class="user-avatar-edit"/>
+                <button type="file" (click)="selectFile()" class="user-avatar-edit">
+                  <mat-icon style="width:35px!important;padding-left:4px;">photo_camera</mat-icon>
+                </button>
+                
+              </form>
+              <h5 style="padding-left: 10px;">Basic Info</h5>
+              <form class="flex-col card card-bordered glass-initial " [formGroup]="userBasicInfoForm" >
+                <mat-form-field style="margin-top: 15px;" class="user-input-container">
+                    <label for="firstname">Firstname:&nbsp;&nbsp;</label>
+                    <input class="form-control basic" id="firstname" matInput formControlName="firstname" readonly="{{isReadOnly}}" required [disabled]="viewMode" fxFlex/>
+                    <mat-error *ngIf="userBasicInfoForm.get('firstname')?.hasError('required')">This is required.</mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="user-input-container">
+                    <label for="surname">Surname:&nbsp;&nbsp;</label>
+                    <input class="form-control basic" id="surname" matInput formControlName="surname" readonly="{{isReadOnly}}" required [disabled]="viewMode" />
+                    <mat-error *ngIf="userBasicInfoForm.get('surname')?.hasError('required')">This is required.</mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="user-input-container">
+                      <label for="othername">Othername:&nbsp;&nbsp;</label>
+                      <input class="form-control basic" id="othername" matInput formControlName="othername" readonly="{{isReadOnly}}" required [disabled]="viewMode" />
+                      <mat-error *ngIf="userBasicInfoForm.get('othername')?.hasError('required')">This is required.</mat-error>
+                  </mat-form-field>
+                  <div style="padding: 40px;">
+                    <a style="color:whitesmoke" id="plan" href="/vendor-subscription" class="btn btn-outline-light">View Active Plan</a>
+                  </div>
+              </form>
+          </div>
+          <!-- <h5 style="white-space: nowrap;">Other Info</h5> -->
+          <form  class="form-container card card-bordered glass-initial" [formGroup]="userDetailsForm" fxFlex>
+              <div class="row-margin-40 " fxLayout="column" fxLayout.gt-sm="row">
+                <mat-form-field fxFlex  style="margin-top: 30px;" >
+                  <label for="email">E-mail:&nbsp;&nbsp;</label>
+                  <input class="form-control" id="email" type="email" class="data-field" matInput formControlName="email" readonly="{{isReadOnly}}" readonly="{{isReadOnly}}" required [disabled]="viewMode" />
+                  <mat-error *ngIf="userDetailsForm.get('email')?.hasError('required')">This is required.</mat-error>
+                  <mat-error *ngIf="userDetailsForm.get('username')?.hasError('email')">Email address is invalid</mat-error>
+                </mat-form-field>
+                
+                <mat-form-field fxFlex>
+                  <label for="mobile">Mobile:&nbsp;&nbsp;</label>
+                  <input class="form-control" id="mobile" class="data-field" matInput formControlName="phone" readonly="{{isReadOnly}}" required [disabled]="viewMode"/>
+                  <mat-error *ngIf="userDetailsForm.get('phone')?.hasError('required')">This is required.</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="row-margin-40" fxLayout="column" fxLayout.gt-sm="row">
+                <mat-form-field fxFlex>
+                  <label for="accountno">Bank acc no:&nbsp;&nbsp;</label>
+                  <input class="form-control" id="accountno"  class="data-field" matInput formControlName="accountno" readonly="{{isReadOnly}}" required [disabled]="viewMode" />
+                  <mat-error *ngIf="userDetailsForm.get('accountno')?.hasError('required')">This is required.</mat-error>
+                </mat-form-field>
+                <mat-form-field fxFlex>
+                  <label for="bnk">Bankname:&nbsp;&nbsp;</label>
+                  <input class="form-control" id="bnk" class="data-field" matInput formControlName="bankname" readonly="{{isReadOnly}}" required [disabled]="viewMode" />
+                  <mat-error *ngIf="userDetailsForm.get('bankname')?.hasError('required')">This is required.</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="row-margin-40" fxLayout="column" fxLayout.gt-sm="row">
+                <mat-form-field fxFlex>
+                  <label for="nationality">Nationality:&nbsp;&nbsp;</label>
+                  <input class="form-control" id="nationality" class="data-field" matInput type="tel" formControlName="country" readonly="{{isReadOnly}}" required [disabled]="viewMode" />
+                  <mat-error *ngIf="userDetailsForm.get('country')?.hasError('required')">This is required.</mat-error>
+                </mat-form-field>
+                <mat-form-field fxFlex>
+                  <label for="regdate">Reg Date:&nbsp;&nbsp;</label>
+                  <input class="form-control" id="regdate" class="data-field" matInput type="tel" readonly formControlName="regdate" [disabled]="true" />
+                </mat-form-field>
+              </div>
+              <div class="row-margin-40" fxLayout="column" fxLayout.gt-sm="row">
+                <mat-form-field fxFlex>
+                  <label for="username">Username:&nbsp;&nbsp;</label>
+                  <input class="form-control" id="username" class="data-field" matInput type="email" formControlName="username" readonly="{{isReadOnly}}" [disabled]="viewMode" />
+                </mat-form-field>
+
+                <mat-form-field fxFlex>
+                  <label for="bvn">BVN:&nbsp;&nbsp;</label>
+                  <input class="form-control" id="bvn" matInput class="data-field"  type="email"  />
+                </mat-form-field>
+                
+              </div>
+              
+              <button style="width:200px;color:white;margin-left:10px;text-align: center;" (click)="saveChanges()" class="btn btn-primary">Save Changes</button>
+              <br>
+              <br>
+              <h5 style="color:white;padding-left:10px;">Transactions</h5>
+              <hr>
+
+            <div style="margin-bottom: 20px!important;" class="">
+              <a href="#" style="width:200px; color:white;text-decoration: underline;  margin:20px;" (click)="showVendorPinModal()">Set Transaction Pin</a>
+              <br>
+              <div style="margin:15px;" class="user-input-container custom-control custom-radio checked">
+                <input formControlName="transaction_pin_enabled" (change)="enableOTP($event)" type="checkbox" name="transaction_pin_enabled" id="transaction_pin_enabled" class="custom-control-input paymentchannel">
+                <label style="white-space: nowrap;" class="custom-control-label" for="transaction_pin_enabled">Use Pin for vendor Payments</label>
+              </div>
+              <br>
+
+            </div>
+          </form>
+        </div>     
+      </mat-card-content>
+    </mat-card>
+</div>

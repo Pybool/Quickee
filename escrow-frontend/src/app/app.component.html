@@ -1,0 +1,71 @@
+<nav>
+    <div class="container mx-auto">
+          <input type="checkbox" id="showNav">
+          <label for="showNav" id="toggleNav"><i class="fas fa-bars"></i></label>
+        <ul class="main-nav" *ngIf="loggedIn">
+            <li style="white-space: nowrap;">
+              <div id="logos" style="white-space: nowrap;">
+                <img  alt="backgroundiamge" src="/assets/images/qblogo1.png">
+                <span class="logotext" style="color:white; font-size:22px; font-weight:900;"><b>uickie</b></span></div>
+            </li>
+            <li class="link" style="white-space: nowrap;">
+                <i class="fas fa-home"></i> &nbsp; <a href="#" class="text-warning" [routerLink]="['']" routerLinkActive="active text-success">Home</a>
+              </li>
+              <li class="link" style="white-space: nowrap;">
+                <i class="fas fa-cart-plus"></i> &nbsp;<a style="white-space: nowrap;" href="#" class="text-warning" [routerLink]="['new-order']" routerLinkActive="active text-success">Create Order</a>
+              </li>
+              <li class="link" style="white-space: nowrap;">
+                <i class="fas fa-history"></i> &nbsp;<a href="#" class="text-warning" [routerLink]="['orders']" routerLinkActive="active text-success">Orders</a>
+              </li>
+              <li class="link" style="white-space: nowrap;" *ngIf="user.is_vendor">
+                <i class="fas fa-user"></i> &nbsp;<a style="white-space: nowrap;" href="#" class="text-warning" [routerLink]="['merchant-orders']" routerLinkActive="active text-success">Vendor Orders</a>
+              </li>
+              <li class="link" style="white-space: nowrap;" *ngIf="!user.is_vendor"> 
+                <i class="fas fa-subscription"></i> &nbsp;<a style="white-space: nowrap;" href="#" class="text-warning" [routerLink]="['vendor-subscription']" routerLinkActive="active text-success">Vendor Subscriptions</a>
+              </li>
+              <!-- <li class="link" style="white-space: nowrap;"  > 
+                <div class="dropdown">
+                  <i class="fas fa-credit-card"></i> &nbsp;<a style="white-space: nowrap;" class="text-warning" href="javascript:void(0)" routerLinkActive="active text-success" onblur="hideDropdown()" onmouseleave="hideDropdown()" onfocus="clearTimeout();">Utilities & Bills</a>
+                <div style="z-index:400!important;overflow:auto" class="dropdown-menu nav-accordion">
+                  <ul class="flex-col">
+                    <li class="nav-sub">
+                        <i class="fas fa-phone"></i> &nbsp;<a [routerLink]="['airtime']" href="javascript:void(0)" class="text-warning col-12" routerLinkActive="active">Airtime Purchase</a><hr>
+                    </li>
+                    <li class="nav-sub">
+                        <i class="fas fa-wifi"></i> &nbsp;<a [routerLink]="['data']" href="javascript:void(0)" class="text-warning col-12" routerLinkActive="active">Data Subscription</a><hr>
+                    </li>
+                    <li class="nav-sub">
+                        <i class="fas fa-tv"></i> &nbsp;<a style="white-space: nowrap;" [routerLink]="['cable']" href="javascript:void(0)" class="text-warning col-12" routerLinkActive="active">Cable Subscription</a><hr>
+                    </li>
+                    <li class="nav-sub">
+                        <i class="fas fa-bolt"></i> &nbsp;<a disabled [routerLink]="['electricity']" href="javascript:void(0)" class="text-warning col-12">Electricity Recharge</a><hr>
+                    </li>
+                  </ul>
+                </div>
+                </div>
+              </li> -->
+              <li class="link" style="white-space: nowrap;"  > 
+                <div class="dropdown">
+                  <i class="fas fa-admin"></i> &nbsp;<a style="white-space: nowrap;" class="text-warning" href="javascript:void(0)" routerLinkActive="active text-success" onblur="hideDropdown()" onmouseleave="hideDropdown()" onfocus="clearTimeout();">Admin</a>
+                <div style="z-index:400!important;overflow:auto" class="dropdown-menu nav-accordion">
+                  <ul class="flex-col">
+                    <li class="nav-sub">
+                        <i class="fas fa-phone"></i> &nbsp;<a [routerLink]="['airtime']" href="javascript:void(0)" class="text-warning col-12" routerLinkActive="active">Utilities & Bills</a><hr>
+                    </li>
+                    <li class="nav-sub">
+                        <i class="fas fa-wifi"></i> &nbsp;<a [routerLink]="['data']" href="javascript:void(0)" class="text-warning col-12" routerLinkActive="active">Escrow</a><hr>
+                    </li>
+                  </ul>
+                </div>
+                </div>
+              </li>
+            <li class="link" style="white-space: nowrap;"><i class="fas fa-user-circle"></i> &nbsp;<a class="text-warning"routerLinkActive="active text-success" href="#" [routerLink]="['userprofile']">Profile</a></li>
+            <li class="link" style="white-space: nowrap;"><i class="fas fa-sign-out-alt"></i> &nbsp;<a class="text-warning"routerLinkActive="active text-success" href="#" (click)="logOut()" [routerLink]="['login']">Signout</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="bg-image container" >
+    <router-outlet></router-outlet>
+    <!-- <app-footer></app-footer> -->
+</div>
+

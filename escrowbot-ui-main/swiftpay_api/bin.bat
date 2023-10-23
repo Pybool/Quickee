@@ -1,7 +1,0 @@
-start sqlite3
-call .open db.sqlite3
-call delete from swiftpay_backend_transactioncart;
-call delete from swiftpay_backend_airtimepurchasehistory;
-call delete from swiftpay_backend_electricitypurchasehistory;
-call delete from swiftpay_backend_datasubscriptionhistory;
-call delete from swiftpay_backend_cablesubscriptionhistory;

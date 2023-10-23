@@ -1,0 +1,58 @@
+
+
+  <a style="display:none;" id="become-vendor-modal" class="btn" href="#open-modal">👋 Basic CSS-Only Modal</a>
+
+
+ 
+    <div class="title ">
+      <h1 style="padding-top: 70px;">Vendor Subscriptions!</h1>
+      <div class="" id="vendor-payment-pin-form">
+        <h1 class="text-accent">pricing</h1>
+        <p class="fs-500 short-text">Plans that work for everyone</p>
+    
+        <div class="plans ">
+    
+            <div class="plan plan--light zoom">
+                <h2 style="color:black" class="plan-title">basic</h2>
+    
+                <p class="plan-price">₦ 1,499<span>/month</span></p>
+    
+                <p class="plan-description">
+                    Eleifend cursus volutpat risus convallis nam sed
+                    quam sollicitudin eget leo at erat cursus justo
+                </p>
+    
+                <a *ngIf="!(subscription_type=='basic')" href="javascript:void(0)" (click)="becomeVendor('basic')" class="btn">Buy Now</a>
+                <a *ngIf="subscription_type=='basic'" disabled href="javascript:void(0)" class="btn">Active</a>
+            </div>
+    
+            <div class="plan plan--accent zoom">
+                <h2 style="color:white;" class="plan-title">super</h2>
+    
+                <p class="plan-price">₦ 4,499<span>/6-months</span></p>
+    
+                <p class="plan-description">
+                    Eleifend cursus volutpat risus convallis nam sed
+                    quam sollicitudin eget leo at erat cursus justo
+                </p>
+    
+                <a *ngIf="!(subscription_type=='super')" href="javascript:void(0)" (click)="becomeVendor('super')" class="btn">Buy Now</a>
+                <a *ngIf="(subscription_type=='super')" href="javascript:void(0)" (click)="becomeVendor('super')" class="btn">Active</a>
+            </div>
+    
+            <div class="plan plan--light zoom">
+                <h2 style="color:black" class="plan-title">Elite'</h2>
+    
+                <p class="plan-price">₦ 8,499<span>/Year</span></p>
+    
+                <p class="plan-description">
+                    Eleifend cursus volutpat risus convallis nam sed
+                    quam sollicitudin eget leo at erat cursus justo
+                </p>
+    
+                <a href="javascript:void(0)" (click)="becomeVendor('elite')" class="btn">Buy Now</a>
+            </div>
+    
+        </div>
+    
+  </div>
