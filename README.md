@@ -17,13 +17,17 @@ cd <project-directory>
 npm install
 ```
 ## Environment Variables (.env)
-TESTRAIL_USERNAME = ''
-TESTRAIL_PASSWORD = ''
-TESTRAIL_URL = ''
-TESTRAIL_PROJECTID = ''
-TESTRAIL_PLAN = ''
-TESTRAIL_SUITEID =  ''
-APIKEY = ''
+
+Ensure you have the following environment variables set in your `.env` file:
+
+```env
+TESTRAIL_USERNAME=''
+TESTRAIL_PASSWORD=''
+TESTRAIL_URL=''
+TESTRAIL_PROJECTID=''
+TESTRAIL_PLAN=''
+TESTRAIL_SUITEID=''
+APIKEY=''
 
 ## Configurations
 Enter your configurations parameter in cypress.env.json
