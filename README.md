@@ -48,13 +48,6 @@ Make sure to set the following configuration parameters in your `cypress.env.jso
 ```
 
 
-## Running Tests
-To run the Cypress tests:
-
-```bash
-npx cypress run
-```
-
 ## Running Tests on Specific Environments
 To run tests on a specific environment (e.g., Bookings):
 
@@ -87,7 +80,7 @@ npm run generate:report
 ```
 This command executes a Node.js script (cucumber-html-report.js) to generate an HTML report based on the results of your Cypress tests.
 
-## TestRail Integration
+# TestRail Integration
 This project includes scripts to interact with TestRail.
 
 ## Delete All Sections/Folders in TestRail
