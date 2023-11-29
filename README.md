@@ -84,10 +84,12 @@ This project includes scripts to interact with TestRail.
 node testrail.js --delete
 ```
 ## Initialize Top-Level Environment Sections/Folders on TestRail
+This command initializes toplevel sections/environments for a new test suite
 ```bash
 node testrail.js --init
 ```
 ## Add Sub Sections to Top-Level Folders
+This command adds test folders within environments
 ```bash
 node testrail.js --createsubdirs
 ```
