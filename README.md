@@ -58,16 +58,36 @@ npx cypress run
 ## Running Tests on Specific Environments
 To run tests on a specific environment (e.g., Bookings):
 
+# Running Tests
+
+This project provides convenient scripts for running regression tests on reservations and bookings, as well as generating reports.
+
+## Run Regression Tests for Reservations
+
+To run regression tests specifically for reservations, use the following command:
+
 ```bash
-npx cypress run --env Bookings
+npm run start:regression-reservations
 ```
+This command uses Cypress to run automated tests with the @automated tag in headless mode, focusing on the reservations environment.
 
-## Viewing Test Results
-After running the tests, Cypress will generate reports and screenshots in the cypress/reports directory.
+## Run Regression Tests for Bookings
+To run regression tests specifically for bookings, use the following command:
+```
+npm run start:regression-bookings
+```
+Similar to the reservations command, this command runs automated tests with the @automated tag in headless mode, focusing on the bookings environment.
 
-For additional configurations and options, refer to the Cypress documentation.
 
-TestRail Integration
+## Generate Test Report
+To generate a test report, use the following command:
+
+```
+npm run generate:report
+```
+This command executes a Node.js script (cucumber-html-report.js) to generate an HTML report based on the results of your Cypress tests.
+
+## TestRail Integration
 This project includes scripts to interact with TestRail.
 
 ## Delete All Sections/Folders in TestRail
