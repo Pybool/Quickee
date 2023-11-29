@@ -1,6 +1,6 @@
 # Cypress Test Suite
 
-This project contains end-to-end tests using Cypress.
+This project contains cypress end-to-end tests using for the Reservation and Booking environments.
 
 ## Prerequisites
 
@@ -28,19 +28,25 @@ TESTRAIL_PROJECTID=''
 TESTRAIL_PLAN=''
 TESTRAIL_SUITEID=''
 APIKEY=''
+```
 
 ## Configurations
-Enter your configurations parameter in cypress.env.json
-"EXPIAN-USERNAME": "",
-"EXPIAN-PASSWORD": "",
-"BOOKING": "https://booking.default-qa8.ticknovate-test.com/",
-"RESERVATION": "https://reservations.default-qa8.ticknovate-test.com/",
-"SERVER_BASE_URL": "",
-"TEST_DOWNLOADS_FOLDER": "",
-"ORDER_DAYS_FROM_TODAY": 1,
-"TEST_PRODUCT": "Taye Test Event"
 
-  
+Make sure to set the following configuration parameters in your `cypress.env.json` file:
+
+```json
+{
+  "EXPIAN-USERNAME": "",
+  "EXPIAN-PASSWORD": "",
+  "BOOKING": "https://booking.default-qa8.ticknovate-test.com/",
+  "RESERVATION": "https://reservations.default-qa8.ticknovate-test.com/",
+  "SERVER_BASE_URL": "",
+  "TEST_DOWNLOADS_FOLDER": "",
+  "ORDER_DAYS_FROM_TODAY": 1,
+  "TEST_PRODUCT": "Taye Test Event"
+}
+```
+
 
 ## Running Tests
 To run the Cypress tests:
