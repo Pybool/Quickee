@@ -47,11 +47,7 @@ Make sure to set the following configuration parameters in your `cypress.env.jso
 }
 ```
 
-
-## Running Tests on Specific Environments
-To run tests on a specific environment (e.g., Bookings):
-
-# Running Tests
+# Running Tests on Specific Environments
 
 This project provides convenient scripts for running regression tests on reservations and bookings, as well as generating reports.
 
