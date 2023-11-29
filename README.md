@@ -103,6 +103,7 @@ To export tests to a selected environment and clear the cypress/cucumber-json re
 ```bash
 node testrail.js --export --Reservations cleandir
 ```
-##Author:
+## Authors:
 ```
-Taye Oyelekan
+1: Taye Oyelekan
+2: Expian
